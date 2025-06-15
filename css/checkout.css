@@ -1,0 +1,502 @@
+/*
+======================
+  VEHICLE RENTAL THEME
+  Checkout Styles
+======================
+*/
+
+/* Import biến màu và style chung từ style.css */
+@import url("style.css");
+
+/* Container */
+.container {
+max-width: 1200px;
+margin: var(--spacing-lg) auto;
+padding: 0 var(--spacing-md);
+flex: 1;
+}
+
+/* Checkout Page */
+.payment-page {
+background: var(--white);
+padding: var(--spacing-lg);
+border-radius: var(--radius-md);
+box-shadow: var(--shadow-md);
+transition: var(--transition);
+}
+
+.payment-page:hover {
+transform: translateY(-5px);
+box-shadow: var(--shadow-lg);
+}
+
+.payment-content {
+display: flex;
+gap: var(--spacing-lg);
+flex-wrap: wrap;
+}
+
+.payment-info, .cart-summary {
+flex: 1;
+min-width: 300px;
+}
+
+.payment-info h2, .cart-summary h3 {
+color: var(--primary-dark);
+margin-bottom: var(--spacing-md);
+font-family: var(--font-accent);
+font-weight: 700;
+display: flex;
+align-items: center;
+gap: 12px;
+position: relative;
+padding-bottom: 15px;
+font-size: 28px;
+}
+
+.payment-info h2::after, .cart-summary h3::after {
+content: '';
+position: absolute;
+bottom: 0;
+left: 0;
+width: 60px;
+height: 3px;
+background-color: var(--primary-color);
+}
+
+/* Form Elements */
+.form-group { margin-bottom: var(--spacing-md); }
+.form-group label { display: block; margin-bottom: var(--spacing-xs); font-weight: 500; color: var(--black); }
+.form-group input, .form-group textarea { width: 100%; padding: var(--spacing-sm); border: 1px solid var(--light-gray); border-radius: var(--radius-sm); font-size: 1em; background: var(--white); transition: var(--transition); }
+.form-group input:focus, .form-group textarea:focus { border-color: var(--primary-color); box-shadow: 0 0 8px rgba(255, 153, 153, 0.2); outline: none; }
+.form-group input.error, .form-group textarea.error { border-color: var(--error); background: var(--light); }
+.error-message { color: var(--error); font-size: 0.9em; margin-top: 5px; }
+.required { color: var(--error); }
+small { color: var(--dark-gray); font-size: 0.9em; margin-top: 3px; display: block;}
+
+
+/* Form Row */
+.form-row {
+display: flex;
+gap: var(--spacing-md);
+}
+.form-row .form-group { flex: 1; }
+
+
+/* Payment Methods */
+.payment-methods-container {
+background: var(--light);
+padding: var(--spacing-md);
+border-radius: var(--radius-md);
+box-shadow: var(--shadow-sm);
+margin-top: var(--spacing-md);
+}
+
+.payment-methods {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+gap: var(--spacing-md);
+margin-bottom: var(--spacing-md);
+}
+
+.payment-option {
+background: var(--white);
+padding: var(--spacing-md);
+border-radius: var(--radius-md);
+transition: var(--transition);
+cursor: pointer;
+border: 1px solid var(--light-gray);
+}
+
+.payment-option:hover {
+transform: translateY(-3px);
+box-shadow: var(--shadow-md);
+border-color: var(--primary-light);
+}
+
+.payment-option label {
+display: flex;
+align-items: center;
+gap: 12px;
+cursor: pointer;
+font-weight: 500;
+color: var(--black);
+}
+
+.payment-option input[type="radio"] {
+accent-color: var(--primary-dark);
+width: auto;
+margin-right: 0;
+}
+
+#payment-method-details {
+    margin-top: var(--spacing-md);
+    padding-top: var(--spacing-md);
+    border-top: 1px dashed var(--gray);
+}
+.payment-details {
+    background: var(--secondary-light);
+    padding: var(--spacing-md);
+    border-radius: var(--radius-md);
+}
+.payment-details h4 {
+    color: var(--primary-dark);
+    margin-bottom: var(--spacing-md);
+    font-family: var(--font-accent);
+    font-size: 1.2em;
+}
+.payment-details .qr-code {
+    width: 120px; height: 120px;
+    margin: var(--spacing-md) auto; display: block;
+    border-radius: var(--radius-sm); box-shadow: var(--shadow-sm);
+}
+.copy-btn {
+    background: var(--white); color: var(--primary-dark);
+    border: 1px solid var(--primary-light);
+    padding: 8px 15px; border-radius: var(--radius-sm);
+    cursor: pointer; transition: var(--transition);
+    font-size: 0.9em;
+}
+.copy-btn:hover { background: var(--primary-light); color: var(--white); transform: scale(1.05); }
+.security-notice {
+    background: var(--light); padding: 12px; border-radius: var(--radius-sm);
+    margin-top: var(--spacing-md); font-size: 0.9em; color: var(--dark-gray);
+    display: flex; align-items: center; gap: 8px;
+    border-left: 3px solid var(--warning);
+}
+
+
+/* Discount Group */
+.discount-group {
+display: flex;
+gap: var(--spacing-sm);
+align-items: center;
+}
+
+.discount-group input {
+flex: 1;
+}
+
+#apply-discount {
+background: var(--primary-dark);
+color: var(--white);
+border: none;
+padding: var(--spacing-sm) var(--spacing-md);
+border-radius: var(--radius-sm);
+cursor: pointer;
+display: flex;
+align-items: center;
+gap: 8px;
+transition: var(--transition);
+font-weight: 600;
+}
+
+#apply-discount:hover {
+background: var(--primary-color);
+transform: scale(1.02);
+}
+
+/* Buttons */
+.form-actions {
+display: flex;
+gap: var(--spacing-md);
+justify-content: space-between;
+margin-top: var(--spacing-lg);
+flex-wrap: wrap;
+}
+
+.btn, .btn-back {
+color: var(--white);
+border: none;
+padding: var(--spacing-md) var(--spacing-lg);
+border-radius: var(--radius-full);
+cursor: pointer;
+font-size: 1em;
+font-weight: 600;
+display: flex;
+align-items: center;
+gap: 10px;
+transition: var(--transition);
+text-transform: uppercase;
+flex-grow: 1;
+justify-content: center;
+min-width: 150px;
+}
+
+.btn {
+    background: linear-gradient(45deg, var(--primary-dark), var(--primary-color));
+}
+.btn:hover {
+    background: linear-gradient(45deg, var(--primary-color), var(--primary-dark));
+    transform: translateY(-3px);
+    box-shadow: 0 6px 12px rgba(255, 102, 153, 0.3);
+}
+
+.btn-back {
+background: var(--light-gray);
+color: var(--dark-gray);
+border: 1px solid var(--gray);
+}
+
+.btn-back:hover {
+background: var(--gray);
+color: var(--black);
+transform: translateY(-3px);
+box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+border-color: var(--dark-gray);
+}
+
+/* Booking Summary */
+.cart-summary {
+background: var(--white);
+padding: var(--spacing-md);
+border-radius: var(--radius-md);
+box-shadow: var(--shadow-md);
+}
+
+/* Style cho thông báo loading ban đầu */
+.loading-message {
+    text-align: center;
+    color: var(--dark-gray);
+    font-style: italic;
+    font-size: 1.1em;
+    padding: var(--spacing-lg);
+    display: flex; /* Dùng flex để căn giữa spinner và text */
+    flex-direction: column; /* Xếp spinner và text theo cột */
+    align-items: center; /* Căn giữa theo chiều ngang */
+    justify-content: center; /* Căn giữa theo chiều dọc */
+    min-height: 150px; /* Đảm bảo có đủ không gian cho loading */
+}
+.loading-message .fa-spinner {
+    margin-bottom: var(--spacing-sm);
+    animation: spin 1s linear infinite; /* Animation spinner */
+}
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+
+.order-card {
+background: var(--light);
+padding: var(--spacing-md);
+border-radius: var(--radius-md);
+border-left: 4px solid var(--primary-color);
+}
+.order-card h4 {
+    color: var(--primary-dark);
+    font-family: var(--font-accent);
+    margin-bottom: var(--spacing-md);
+    font-size: 1.3em;
+    border-bottom: 1px dashed var(--gray);
+    padding-bottom: var(--spacing-sm);
+}
+
+
+/* Booking Items */
+.order-items {
+margin-bottom: var(--spacing-md);
+}
+
+.order-item {
+padding: 15px 0;
+border-bottom: 1px solid var(--secondary-dark);
+}
+
+.order-item:last-child {
+border-bottom: none;
+}
+
+.item-details h4 {
+font-family: var(--font-base);
+color: var(--black);
+margin-bottom: 5px;
+font-size: 1.1em;
+font-weight: 600;
+}
+.item-details p {
+color: var(--dark-gray); margin: 3px 0; font-size: 0.95em;
+}
+
+.item-info p {
+color: var(--black); margin: 5px 0; font-size: 1em; font-weight: 500;
+}
+
+/* Order Totals */
+.order-totals {
+background: var(--secondary-light);
+padding: var(--spacing-md);
+border-radius: var(--radius-md);
+border-left: 4px solid var(--primary-dark);
+margin-top: var(--spacing-md);
+}
+
+.total-item {
+display: flex;
+justify-content: space-between;
+margin: 10px 0;
+font-size: 1em;
+color: var(--black);
+}
+
+.total-item span:first-child { font-weight: 500; }
+
+.total-item.final-total {
+font-size: 1.4em;
+color: var(--primary-dark);
+font-weight: 700;
+margin-top: 15px;
+padding-top: 15px;
+border-top: 1px solid var(--gray);
+}
+
+/* Empty State (sẽ bị JS thay thế) */
+.empty-cart {
+text-align: center;
+color: var(--dark-gray);
+font-style: italic;
+font-size: 1.1em;
+padding: var(--spacing-lg);
+}
+
+.empty-cart a {
+color: var(--primary-dark);
+text-decoration: underline;
+font-weight: 500;
+}
+
+
+/* Modal */
+.modal {
+position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+background: rgba(0, 0, 0, 0.7);
+display: flex; justify-content: center; align-items: center;
+z-index: 1000;
+animation: fadeIn 0.3s ease;
+}
+
+.modal-content {
+background: var(--white); padding: var(--spacing-lg); border-radius: var(--radius-md);
+max-width: 600px; width: 90%;
+box-shadow: var(--shadow-lg);
+animation: slideIn 0.3s ease;
+text-align: center;
+}
+
+.modal-content h3 {
+color: var(--primary-dark); font-family: var(--font-accent); font-weight: 700;
+display: flex; align-items: center; gap: 12px; justify-content: center;
+margin-bottom: var(--spacing-md);
+}
+.modal-content p {
+    margin-bottom: var(--spacing-md);
+    color: var(--dark-gray);
+}
+
+
+.modal-actions {
+display: flex;
+gap: var(--spacing-md);
+justify-content: center;
+margin-top: var(--spacing-md);
+flex-wrap: wrap;
+}
+
+
+/* Toast */
+#toast {
+    position: fixed;
+    bottom: var(--spacing-lg);
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(51, 51, 51, 0.9);
+    color: var(--white);
+    padding: var(--spacing-md) var(--spacing-xl);
+    border-radius: var(--radius-md);
+    z-index: 1000;
+    font-size: 1em;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.5s ease-out, visibility 0.5s ease-out;
+    box-shadow: var(--shadow-lg);
+}
+
+#toast.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+#toast.error {
+    background-color: rgba(255, 107, 107, 0.9);
+}
+#toast.success {
+    background-color: rgba(76, 175, 80, 0.9);
+}
+#toast.warning {
+    background-color: rgba(255, 193, 7, 0.9);
+}
+
+
+/* Footer */
+footer {
+    background-color: var(--dark-gray);
+    color: var(--white);
+    text-align: center;
+    padding: var(--spacing-md) 0;
+    font-size: 0.9em;
+    margin-top: var(--spacing-xl);
+}
+
+
+/* Responsive */
+@media (max-width: 992px) {
+.payment-content { gap: var(--spacing-md); }
+.payment-page { padding: var(--spacing-md); }
+.payment-methods { grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); }
+}
+
+@media (max-width: 768px) {
+.container { margin: var(--spacing-md) auto; }
+.payment-content {
+  flex-direction: column;
+  gap: var(--spacing-lg);
+}
+
+.payment-info, .cart-summary {
+  min-width: 100%;
+}
+
+.payment-page {
+  padding: var(--spacing-md);
+}
+
+.form-actions {
+  flex-direction: column;
+}
+
+.btn, .btn-back {
+  width: 100%;
+  font-size: 1em;
+  padding: var(--spacing-sm) var(--spacing-md);
+}
+
+.payment-methods { grid-template-columns: 1fr; }
+
+.form-row {
+  flex-direction: column;
+  gap: var(--spacing-sm);
+}
+
+.modal-content {
+  padding: var(--spacing-md);
+  width: 95%;
+}
+}
+
+@media (max-width: 480px) {
+.payment-info h2, .cart-summary h3 { font-size: 24px; gap: 8px; }
+.modal-content h3 { font-size: 20px; gap: 8px; }
+.total-item.final-total { font-size: 1.2em; }
+.btn, .btn-back { padding: var(--spacing-sm); font-size: 0.9em; }
+#apply-discount { padding: var(--spacing-sm); font-size: 0.9em; }
+}
