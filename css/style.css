@@ -1,34 +1,27 @@
-/*
-======================
-  VEHICLE RENTAL THEME
-  Main Styles
-======================
-*/
 
 :root {
-    /* Color Palette - Có thể điều chỉnh cho chủ đề xe/du lịch */
-    --primary-color: #FF6699;  /* Tông hồng chính */
-    --primary-dark: #FF3366;   /* Hồng đậm */
-    --primary-light: #FF9999;  /* Hồng nhạt */
-    --secondary-color: #FFE4E9; /* Màu nền nhẹ/accent */
-    --accent-color: #FF3366;   /* Màu nhấn */
+    --primary-color: #FF6699; 
+    --primary-dark: #FF3366;  
+    --primary-light: #FF9999;  
+    --secondary-color: #FFE4E9; 
+    --accent-color: #FF3366;   
   
     /* Neutral Colors */
     --white: #FFFFFF;
-    --light-bg: #FFF5F5;    /* Nền rất nhạt */
-    --light-gray: #F3F3F3;  /* Xám nhạt */
-    --gray: #CCCCCC;       /* Xám trung bình */
-    --dark-gray: #666666;    /* Xám đậm (văn bản phụ) */
-    --black: #333333;      /* Đen (văn bản chính) */
+    --light-bg: #FFF5F5;   
+    --light-gray: #F3F3F3;  
+    --gray: #CCCCCC;       
+    --dark-gray: #666666;   
+    --black: #333333;     
   
     /* Status Colors */
-    --success: #4CAF50;    /* Xanh lá cây */
-    --warning: #FFC107;    /* Vàng */
-    --error: #FF5252;      /* Đỏ */
+    --success: #4CAF50;    
+    --warning: #FFC107;   
+    --error: #FF5252;      /*
   
     /* Typography */
     --font-main: 'Montserrat', Arial, sans-serif;
-    --font-accent: 'Playfair Display', serif; /* Font cho tiêu đề */
+    --font-accent: 'Playfair Display', serif; 
   
     /* Spacing */
     --spacing-xs: 5px;
@@ -38,10 +31,9 @@
     --spacing-xl: 80px;
   
     /* Shadows */
-    --shadow-sm: 0 2px 5px rgba(0, 0, 0, 0.1); /* Điều chỉnh shadow cho bớt "hồng" */
-    --shadow-md: 0 5px 15px rgba(0, 0, 0, 0.07); /* Điều chỉnh shadow */
-    --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.1); /* Điều chỉnh shadow */
-  
+    --shadow-sm: 0 2px 5px rgba(0, 0, 0, 0.1); 
+    --shadow-md: 0 5px 15px rgba(0, 0, 0, 0.07); 
+    --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.1); 
     /* Border Radius */
     --radius-sm: 5px;
     --radius-md: 10px;
@@ -60,7 +52,7 @@
   
   body {
     font-family: var(--font-main);
-    background-color: var(--light-bg); /* Sử dụng biến màu nền nhạt */
+    background-color: var(--light-bg); 
     color: var(--black);
     line-height: 1.6;
     min-height: 100vh;
@@ -70,32 +62,31 @@
   
   a {
     text-decoration: none;
-    color: var(--primary-dark); /* Thường dùng màu đậm hơn cho link */
+    color: var(--primary-dark); 
     transition: var(--transition);
   }
   
   a:hover {
-    color: var(--primary-color); /* Màu chính khi hover */
+    color: var(--primary-color); 
   }
   
   h1, h2, h3, h4 {
     font-family: var(--font-accent);
-    font-weight: 700; /* Đặt font-weight cố định nếu cần */
+    font-weight: 700; 
   }
   
   .container {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0 var(--spacing-md); /* Sử dụng biến spacing */
-    width: 100%; /* Đảm bảo container chiếm đủ chiều rộng */
+    padding: 0 var(--spacing-md); 
+    width: 100%; 
   }
   
   /* Header */
   header {
-    /* Giữ style gradient hoặc đổi gradient/màu nền */
     background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
     box-shadow: var(--shadow-md);
-    padding: var(--spacing-md) 0; /* Sử dụng biến spacing */
+    padding: var(--spacing-md) 0; 
     position: sticky;
     top: 0;
     z-index: 1000;
@@ -105,40 +96,40 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    max-width: 1200px; /* Căn giữa nội dung header */
+    max-width: 1200px; 
     margin: 0 auto;
     padding: 0 var(--spacing-md);
   }
   
   .logo h1 {
-    color: var(--white); /* Màu trắng cho tên thương hiệu trên nền header */
-    font-size: 32px; /* Kích thước font có thể điều chỉnh */
+    color: var(--white);
+    font-size: 32px; 
     margin: 0;
     font-family: var(--font-accent);
   }
   
-  .logo .slogan { /* Đổi từ tagline thành slogan theo HTML mới */
-    color: rgba(255, 255, 255, 0.9); /* Màu slogan trên nền header */
+  .logo .slogan { 
+    color: rgba(255, 255, 255, 0.9); 
     font-size: 14px;
     display: block;
-    letter-spacing: 1px; /* Điều chỉnh letter-spacing */
-    margin-top: 2px; /* Điều chỉnh khoảng cách */
+    letter-spacing: 1px; 
+    margin-top: 2px;
   }
   
-  .header-right-items { /* Thêm class này từ HTML vehicles.html */
+  .header-right-items { 
       display: flex;
       align-items: center;
       gap: var(--spacing-md);
   }
   
   
-  .header-cta { /* Class có trong style.css cũ */
+  .header-cta { 
     display: flex;
     align-items: center;
-    gap: 15px; /* Hoặc sử dụng biến spacing-sm/md */
+    gap: 15px; 
   }
   
-  .header-phone { /* Class có trong style.css cũ */
+  .header-phone { 
     background-color: var(--secondary-color);
     padding: 8px 15px;
     border-radius: var(--radius-full);
@@ -148,12 +139,12 @@
   }
   
   .header-phone:hover {
-    background-color: var(--primary-dark); /* Đổi màu hover */
+    background-color: var(--primary-dark);
     color: var(--white);
   }
   
-  .header-cta i { /* Class có trong style.css cũ */
-    margin-right: 8px; /* Hoặc sử dụng biến spacing-xs */
+  .header-cta i { 
+    margin-right: 8px; 
     background-color: var(--secondary-color);
     width: 30px;
     height: 30px;
@@ -161,80 +152,79 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    color: var(--primary-dark); /* Màu icon */
+    color: var(--primary-dark); 
   }
   
   /* Navigation */
   nav {
-    background-color: var(--secondary-color); /* Sử dụng biến secondary */
-    padding: var(--spacing-sm) 0; /* Sử dụng biến spacing */
+    background-color: var(--secondary-color); 
+    padding: var(--spacing-sm) 0;
     border-bottom: 1px solid var(--primary-light);
     box-shadow: var(--shadow-sm);
   }
   
-  .nav-container { /* Class có trong style.css cũ (nếu dùng) hoặc navigation flexbox */
+  .nav-container { 
     display: flex;
     justify-content: center;
   }
   
   nav a {
-    margin: 0 var(--spacing-md); /* Sử dụng biến spacing */
-    padding: var(--spacing-sm) var(--spacing-md); /* Sử dụng biến spacing */
-    color: var(--primary-dark); /* Màu link nav */
+    margin: 0 var(--spacing-md); 
+    padding: var(--spacing-sm) var(--spacing-md);
+    color: var(--primary-dark); 
     font-weight: 600;
     position: relative;
     transition: var(--transition);
-    border-radius: var(--radius-full); /* Sử dụng biến radius */
-    display: flex; /* Để icon căn giữa với text */
+    border-radius: var(--radius-full);
+    display: flex; 
     align-items: center;
-    gap: var(--spacing-xs); /* Khoảng cách giữa icon và text */
+    gap: var(--spacing-xs); 
   }
   
   nav a:hover {
-    background-color: var(--primary-light); /* Màu nền khi hover */
-    color: var(--white); /* Màu chữ khi hover */
+    background-color: var(--primary-light); 
+    color: var(--white); 
   }
   
   nav a.active {
-    background-color: var(--primary-dark); /* Màu nền khi active */
-    color: var(--white); /* Màu chữ khi active */
+    background-color: var(--primary-dark); 
+    color: var(--white);
   }
   
   /* Footer */
   footer {
-    /* Giữ style gradient hoặc đổi gradient/màu nền */
     background: linear-gradient(135deg, var(--primary-dark), var(--primary-color));
-    padding: var(--spacing-lg) 0 var(--spacing-md); /* Sử dụng biến spacing */
+    padding: var(--spacing-lg) 0 var(--spacing-md); 
     margin-top: auto;
     color: var(--white);
-    text-align: center; /* Căn giữa nội dung footer */
+    text-align: center; 
   }
   
-  .footer-bottom { /* Class có trong style.css cũ */
+  .footer-bottom { 
     text-align: center;
-    padding: var(--spacing-md) 0; /* Sử dụng biến spacing */
+    padding: var(--spacing-md) 0; 
     color: rgba(255, 255, 255, 0.8);
-    margin-top: var(--spacing-lg); /* Sử dụng biến spacing */
-    border-top: 1px solid rgba(255, 255, 255, 0.1); /* Thêm đường kẻ trên */
+    margin-top: var(--spacing-lg);
+    border-top: 1px solid rgba(255, 255, 255, 0.1); 
   }
   
-  /* Nếu bạn muốn footer có nhiều cột như trong index.css cũ */
+
   .footer-top {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: var(--spacing-lg); /* Sử dụng biến spacing */
+    gap: var(--spacing-lg); 
     max-width: 1200px;
-    margin: 0 auto var(--spacing-lg); /* Khoảng cách dưới footer-top */
+    margin: 0 auto var(--spacing-lg); 
     padding: 0 var(--spacing-md);
-    text-align: left; /* Căn trái nội dung cột footer */
+    text-align: left; 
   }
   
   .footer-column h4 {
     color: var(--white);
     font-size: 18px;
-    margin-bottom: var(--spacing-md); /* Sử dụng biến spacing */
+    margin-bottom: var(--spacing-md); 
     position: relative;
-    padding-bottom: var(--spacing-sm); /* Sử dụng biến spacing */
+    padding-bottom: var(--spacing-sm); 
   }
   
   .footer-column h4::after {
@@ -242,7 +232,7 @@
     position: absolute;
     bottom: 0;
     left: 0;
-    width: 40px; /* Chiều rộng gạch dưới */
+    width: 40px; 
     height: 2px;
     background-color: rgba(255, 255, 255, 0.5);
   }
@@ -251,7 +241,7 @@
     color: rgba(255, 255, 255, 0.8);
     font-size: 14px;
     display: block;
-    margin-bottom: var(--spacing-xs); /* Sử dụng biến spacing */
+    margin-bottom: var(--spacing-xs); 
     transition: var(--transition);
   }
   
@@ -261,24 +251,23 @@
   }
   
   
-  /* Hamburger Menu (Nếu bạn muốn có menu responsive) */
+  /* Hamburger Menu */
   .hamburger {
-    display: none; /* Mặc định ẩn */
+    display: none; 
     cursor: pointer;
-    font-size: 28px; /* Kích thước icon */
-    color: var(--white); /* Màu icon trên header */
+    font-size: 28px; 
+    color: var(--white); 
   }
   
   @media (max-width: 768px) {
     .header-inner {
-      flex-direction: column; /* Header stack trên mobile */
-      gap: var(--spacing-sm); /* Khoảng cách giữa logo và cta */
+      flex-direction: column; 
+      gap: var(--spacing-sm); 
       text-align: center;
     }
   
     .header-right-items {
-        justify-content: center; /* Căn giữa các item bên phải header */
-        width: 100%;
+        justify-content: center; 
     }
   
     .logo h1 {
@@ -300,11 +289,11 @@
   
      /* Responsive cho footer nhiều cột */
      .footer-top {
-         grid-template-columns: 1fr; /* Stack cột trên mobile */
+         grid-template-columns: 1fr; 
          text-align: center;
      }
      .footer-column h4::after {
-         left: 50%; /* Căn giữa gạch dưới tiêu đề cột */
+         left: 50%; 
          transform: translateX(-50%);
      }
   }
@@ -315,11 +304,9 @@
     from { opacity: 0; transform: translateY(20px); }
     to { opacity: 1; transform: translateY(0); }
   }
-  /* Thêm animation cho các phần tử khác nếu muốn */
-  
-  /* Accessibility */
+
   button:focus, a:focus, input:focus, select:focus, textarea:focus {
-    outline: 2px solid var(--primary-dark); /* Màu outline khi focus */
+    outline: 2px solid var(--primary-dark); 
     outline-offset: 2px;
   }
   
@@ -328,7 +315,7 @@
     position: fixed;
     bottom: 30px;
     right: 30px;
-    width: 45px; /* Kích thước nút */
+    width: 45px; 
     height: 45px;
     background-color: var(--primary-color);
     color: var(--white);
@@ -341,7 +328,7 @@
     visibility: hidden;
     transition: var(--transition);
     box-shadow: var(--shadow-md);
-    z-index: 999; /* Đảm bảo nút hiển thị trên nội dung */
+    z-index: 999; 
   }
   
   .back-to-top.visible {
@@ -351,6 +338,6 @@
   
   .back-to-top:hover {
     background-color: var(--primary-dark);
-    transform: translateY(-3px); /* Hiệu ứng nhấc nhẹ */
+    transform: translateY(-3px); 
     box-shadow: var(--shadow-lg);
   }

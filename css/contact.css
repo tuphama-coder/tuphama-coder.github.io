@@ -1,25 +1,12 @@
-/*
-======================
-  VEHICLE RENTAL THEME
-  Contact Styles
-======================
-*/
 
-/* Import biến màu và style chung từ style.css */
 @import url("style.css");
 
-/*
- * BEGIN COLOR OVERRIDES to match blog.css palette
- * These variables are explicitly defined here to ensure contact.css
- * uses the same color scheme as blog.css, overriding any defaults from style.css.
- */
 :root {
-    --primary-color: #6C7EFF; /* Màu xanh tím */
-    --primary-color-rgb: 108, 126, 255; /* Thêm biến RGB cho primary-color */
-    --primary-dark: #4A5CDA; /* Màu xanh tím đậm hơn */
-    --primary-light: #A7B6FF; /* Màu xanh tím nhạt hơn */
-    --accent-color: #FF6B6B; /* Màu đỏ cam làm điểm nhấn */
-    --text-color: #333;
+    --primary-color: #6C7EFF; 
+    --primary-color-rgb: 108, 126, 255; 
+    --primary-dark: #4A5CDA; 
+    --primary-light: #A7B6FF; 
+    --accent-color: #FF6B6B; 
     --light-gray: #eee;
     --dark-gray: #555;
     --white: #ffffff;
@@ -38,10 +25,8 @@
     --font-accent: 'Playfair Display', serif;
     --transition: all 0.3s ease-in-out;
 }
-/* END COLOR OVERRIDES */
 
-
-/* Header styles (matching blog.css and account.css for consistency) */
+/* Header styles  */
 header.main-header {
   background: linear-gradient(135deg, var(--primary-dark), var(--primary-color));
   padding: var(--spacing-lg) 0;
@@ -91,7 +76,7 @@ header.main-header::before {
     font-weight: 400;
 }
 
-/* Navigation styles (matching other pages) */
+/* Navigation styles */
 nav {
     background-color: var(--white);
     box-shadow: var(--shadow-sm);
@@ -100,7 +85,7 @@ nav {
     border-bottom: 1px solid var(--light-gray);
     margin-bottom: var(--spacing-lg);
 
-     position: sticky; /* giữ thanh header đứng im trong nav*/
+     position: sticky; 
     top: 0;
     z-index: 1000;
     background-color: white;
@@ -170,7 +155,7 @@ nav {
     font-size: 32px;
     color: var(--primary-dark);
     text-align: center;
-    margin-bottom: var(--spacing-md); /* Adjusted for description */
+    margin-bottom: var(--spacing-md); 
     position: relative;
     padding-bottom: var(--spacing-sm);
 }
@@ -214,7 +199,7 @@ nav {
     box-shadow: var(--shadow-md);
     flex: 1;
     min-width: 300px;
-    max-width: 550px; /* Limit width to keep layout clean */
+    max-width: 550px; 
     border-top: 5px solid var(--primary-light);
     transition: var(--transition);
 }
@@ -249,7 +234,7 @@ nav {
 
 .info-item {
     display: flex;
-    align-items: flex-start; /* Align icon to top of text */
+    align-items: flex-start; 
     gap: var(--spacing-md);
     margin-bottom: var(--spacing-md);
     color: var(--dark-gray);
@@ -259,7 +244,7 @@ nav {
 .info-item i {
     color: var(--primary-color);
     font-size: 1.5em;
-    margin-top: 3px; /* Align icon better visually */
+    margin-top: 3px; 
 }
 
 .info-item p {
@@ -330,19 +315,19 @@ nav {
 
 .contact-form-card input.error-border,
 .contact-form-card textarea.error-border {
-    border-color: var(--accent-color); /* Changed to accent-color for errors */
-    box-shadow: 0 0 0 3px rgba(var(--accent-color), 0.2); /* Using accent-color for shadow */
+    border-color: var(--accent-color); 
+    box-shadow: 0 0 0 3px rgba(var(--accent-color), 0.2); 
 }
 
 .contact-form-card .required {
-    color: var(--accent-color); /* Changed to accent-color for required fields */
+    color: var(--accent-color); 
 }
 
 .contact-form-card .error-message {
-    color: var(--accent-color); /* Changed to accent-color for error messages */
+    color: var(--accent-color); 
     font-size: 0.9em;
     margin-top: 5px;
-    display: none; /* Hidden by default */
+    display: none;
 }
 
 .contact-form-card .btn {
@@ -378,8 +363,8 @@ nav {
     padding: var(--spacing-lg);
     border-radius: var(--radius-md);
     box-shadow: var(--shadow-md);
-    border-top: 5px solid var(--accent-color); /* Changed to accent-color for map border */
-    margin-top: var(--spacing-lg); /* Ensure separation from grid */
+    border-top: 5px solid var(--accent-color);
+    margin-top: var(--spacing-lg); 
 }
 
 .contact-map h3 {
@@ -412,7 +397,7 @@ nav {
     box-shadow: var(--shadow-sm);
 }
 
-/* Toast and Loading styles (from utils.js, ensure they are present in a global CSS or copied here) */
+/* Toast and Loading styles  */
 #toast {
     position: fixed;
     bottom: var(--spacing-lg);
@@ -436,13 +421,13 @@ nav {
 }
 
 #toast.error {
-    background-color: var(--accent-color); /* Changed to accent-color for errors */
+    background-color: var(--accent-color); 
 }
 #toast.success {
-    background-color: var(--primary-dark); /* Using primary-dark for success, similar to header gradient */
+    background-color: var(--primary-dark); 
 }
 #toast.warning {
-    background-color: var(--primary-light); /* Using primary-light for warning */
+    background-color: var(--primary-light); 
 }
 
 #loading {
@@ -545,7 +530,7 @@ nav {
         padding: var(--spacing-sm) 0;
     }
     .nav-item::after {
-        width: 0; /* Hide dynamic underline on stacked nav */
+        width: 0; 
     }
 
     .contact-section h2 {

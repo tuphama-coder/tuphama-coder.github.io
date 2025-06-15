@@ -1,15 +1,12 @@
 document.addEventListener('DOMContentLoaded', function () {
   const blogCards = document.querySelectorAll('.blog-post');
 
-  // Initialize Skeleton Loading
   initializeSkeletonLoading();
 
-  // Initialize Scroll Effects
   if (blogCards.length > 0) {
     initializeScrollEffects();
   }
 
-  // Functions
   function initializeSkeletonLoading() {
     blogCards.forEach((card) => {
       card.classList.add('skeleton');
@@ -33,7 +30,6 @@ document.addEventListener('DOMContentLoaded', function () {
     blogCards.forEach((card) => observer.observe(card));
   }
 
-  // Các hàm liên quan đến lọc danh mục và tìm kiếm đã được loại bỏ ở đây
 
   const dynamicStyle = document.createElement('style');
   dynamicStyle.textContent = `

@@ -1,15 +1,13 @@
-// common/utils.js
 
 export function formatPrice(price) {
     if (typeof price !== 'number') return 'N/A';
-    return price.toLocaleString('vi-VN'); // Sử dụng toLocaleString để định dạng tiền tệ Việt Nam
+    return price.toLocaleString('vi-VN');
 }
 
 export function redirectToPage(pageUrl) {
     window.location.href = pageUrl;
 }
 
-// Function to show toast messages
 let toastTimeout;
 export function showToast(message, type = 'info', duration = 3000) {
     const toast = document.getElementById('toast');
@@ -21,7 +19,7 @@ export function showToast(message, type = 'info', duration = 3000) {
     }
 
     toastMessage.textContent = message;
-    toast.className = 'toast show'; // Reset classes and add 'show'
+    toast.className = 'toast show'; 
     if (type === 'success') {
         toast.classList.add('success');
     } else if (type === 'error') {
@@ -29,20 +27,17 @@ export function showToast(message, type = 'info', duration = 3000) {
     } else if (type === 'warning') {
         toast.classList.add('warning');
     } else {
-        toast.classList.add('info'); // Default type
+        toast.classList.add('info'); 
     }
 
 
     clearTimeout(toastTimeout);
     toastTimeout = setTimeout(() => {
-        toast.classList.remove('show', 'success', 'error', 'warning', 'info'); // Remove all specific types
+        toast.classList.remove('show', 'success', 'error', 'warning', 'info'); 
     }, duration);
 }
 
-// Function to show error messages next to input fields
 export function showError(fieldId, message) {
-    // Có thể truyền ID của input, hoặc trực tiếp errorElement nếu có
-    // Dạng `input.id`-error là chuẩn nếu bạn muốn ẩn/hiện tự động
     let errorElement = document.getElementById(`${fieldId}-error`);
     if (!errorElement) {
         errorElement = document.createElement('div');
@@ -50,8 +45,7 @@ export function showError(fieldId, message) {
         errorElement.className = 'error-message';
         const field = document.getElementById(fieldId);
         if (field) {
-            field.classList.add('error'); // Add error class to input
-            // Chèn lỗi ngay sau input
+            field.classList.add('error');
             field.parentNode.insertBefore(errorElement, field.nextSibling);
         } else {
             console.warn(`Field with ID ${fieldId} not found for error message.`);
@@ -62,7 +56,7 @@ export function showError(fieldId, message) {
     errorElement.style.display = 'block';
 }
 
-// Function to hide error messages
+
 export function hideError(fieldId) {
     const errorElement = document.getElementById(`${fieldId}-error`);
     if (errorElement) {
@@ -74,7 +68,7 @@ export function hideError(fieldId) {
     }
 }
 
-// Function to get URL parameter
+
 export function getUrlParameter(name) {
     name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
     var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
@@ -82,7 +76,7 @@ export function getUrlParameter(name) {
     return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
 }
 
-// Simple form validation utility
+
 export function validateForm(rules) {
     let isValid = true;
     for (const fieldId in rules) {
@@ -94,7 +88,7 @@ export function validateForm(rules) {
             continue;
         }
 
-        hideError(fieldId); // Clear previous error
+        hideError(fieldId); 
 
         if (rule.required && !input.value.trim()) {
             showError(fieldId, rule.errorMessage || 'Trường này không được để trống.');
@@ -107,22 +101,18 @@ export function validateForm(rules) {
             isValid = false;
             continue;
         }
-        // Add more validation types (e.g., email, minLength, maxLength) as needed
     }
     return isValid;
 }
 
-// Check if user is logged in (Placeholder - cần chỉnh sửa theo logic xác thực thật của bạn)
+
 export function isLoggedIn() {
-    // Trong môi trường thực tế, bạn sẽ kiểm tra token JWT trong localStorage/sessionStorage
-    // và/hoặc xác thực với backend.
-    const user = localStorage.getItem('user'); // Giả định 'user' object được lưu sau khi đăng nhập
-    return !!user; // Trả về true nếu có user trong localStorage
+    const user = localStorage.getItem('user'); 
+    return !!user; 
 }
 
 
-// --- Loading Overlay Functions ---
-let loadingOverlay = null; // Biến này sẽ giữ tham chiếu đến phần tử overlay
+let loadingOverlay = null; 
 
 export function showLoading() {
     if (!loadingOverlay) {
@@ -153,20 +143,17 @@ export function showLoading() {
             <span>Đang xử lý...</span>
         `;
         document.body.appendChild(loadingOverlay);
-        // Kích hoạt transition
         setTimeout(() => { loadingOverlay.style.opacity = '1'; }, 10);
     }
     loadingOverlay.style.display = 'flex';
-    loadingOverlay.style.opacity = '1'; // Đảm bảo opacity được đặt nếu đã tạo
+    loadingOverlay.style.opacity = '1'; 
 }
 
 export function hideLoading() {
     if (loadingOverlay) {
-        // Kích hoạt transition khi ẩn
         loadingOverlay.style.opacity = '0';
-        // Ẩn hoàn toàn sau khi transition kết thúc
         setTimeout(() => {
             if (loadingOverlay) loadingOverlay.style.display = 'none';
-        }, 300); // Trùng với thời gian transition
+        }, 300); 
     }
 }

@@ -1,22 +1,22 @@
 CREATE DATABASE IF NOT EXISTS vehicle_rental;
 USE vehicle_rental;
 
--- Bảng users: Giữ nguyên cấu trúc cơ bản
+-- Bảng users:
 CREATE TABLE users (
     id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
     email VARCHAR(255) UNIQUE NOT NULL,
     phone VARCHAR(20),
-    password VARCHAR(255), -- Lưu ý: Nên mã hóa mật khẩu trong ứng dụng thực tế!
+    password VARCHAR(255), 
     address TEXT,
     notifications BOOLEAN DEFAULT TRUE,
-    coupons JSON, -- Có thể giữ lại cho các chương trình khuyến mãi thuê xe
-    is_verified BOOLEAN DEFAULT FALSE, -- Thêm cột để đánh dấu đã xác minh email/SĐT
-    otp_code VARCHAR(10),            -- Lưu mã OTP tạm thời
-    otp_expiry DATETIME               -- Thời gian hết hạn của OTP
+    coupons JSON, 
+    is_verified BOOLEAN DEFAULT FALSE, 
+    otp_code VARCHAR(10),            
+    otp_expiry DATETIME               
 );
 
--- Bảng vehicles: Giữ nguyên cấu trúc
+-- Bảng vehicles
 CREATE TABLE vehicles (
     id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
@@ -29,11 +29,11 @@ CREATE TABLE vehicles (
     image_url VARCHAR(255)
 );
 
--- Bảng bookings: ĐÃ SỬA vehicle_id thành INT
+-- Bảng bookings
 CREATE TABLE bookings (
     id INT AUTO_INCREMENT PRIMARY KEY,
     user_id INT,
-    vehicle_id INT, -- ĐÃ SỬA: Kiểu dữ liệu giờ là INT để khớp với vehicles.id
+    vehicle_id INT, 
     start_date DATETIME NOT NULL,
     end_date DATETIME NOT NULL,
     actual_pickup_date DATETIME,
@@ -46,13 +46,13 @@ CREATE TABLE bookings (
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
     updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     FOREIGN KEY (user_id) REFERENCES users(id),
-    FOREIGN KEY (vehicle_id) REFERENCES vehicles(id) -- THAM CHIẾU ĐÃ ĐÚNG KIỂU DỮ LIỆU
+    FOREIGN KEY (vehicle_id) REFERENCES vehicles(id) 
 );
 
--- Bảng discounts: Quản lý mã giảm giá (Giữ nguyên)
+-- Bảng discounts
 CREATE TABLE discounts (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    code VARCHAR(50) UNIQUE NOT NULL, -- Mã giảm giá (ví dụ: THUEXE20, GIAM100K)
+    code VARCHAR(50) UNIQUE NOT NULL, 
     type VARCHAR(20) NOT NULL, -- Loại giảm giá ('percentage' hoặc 'fixed')
     value DECIMAL(10, 2) NOT NULL, -- Giá trị giảm giá (ví dụ: 20 cho 20%, hoặc 100000 cho 100k)
     min_order_value DECIMAL(10, 2) DEFAULT 0.00, -- Giá trị đơn hàng tối thiểu để áp dụng
@@ -65,16 +65,16 @@ CREATE TABLE discounts (
 );
 
 
--- Bảng addresses: Địa chỉ đã lưu của người dùng (Giữ nguyên)
+-- Bảng addresses:
 CREATE TABLE addresses (
     id INT AUTO_INCREMENT PRIMARY KEY,
     user_id INT,
-    name VARCHAR(255) NOT NULL,     -- Tên địa chỉ (e.g., Nhà riêng, Văn phòng)
+    name VARCHAR(255) NOT NULL,    
     details TEXT NOT NULL,        -- Chi tiết địa chỉ (số nhà, đường, phường, quận)
     FOREIGN KEY (user_id) REFERENCES users(id)
 );
 
--- Bảng reviews: Đánh giá (Liên kết với xe và/hoặc booking)
+-- Bảng reviews: 
 CREATE TABLE reviews (
     id INT AUTO_INCREMENT PRIMARY KEY,
     user_id INT,
@@ -88,7 +88,7 @@ CREATE TABLE reviews (
     FOREIGN KEY (booking_id) REFERENCES bookings(id)
 );
 
--- Thêm dữ liệu mẫu cho bảng discounts (nếu bạn muốn)
+-- Thêm dữ liệu mẫu cho bảng discounts 
 INSERT INTO discounts (code, type, value, expires_at, is_active, min_order_value, max_discount_amount, usage_limit) VALUES
 ('THUEXE20', 'percentage', 20.00, '2025-12-31 23:59:59', TRUE, 500000.00, 200000.00, 100),
 ('GIAM100K', 'fixed', 100000.00, '2025-11-30 23:59:59', TRUE, 1000000.00, NULL, 50),
@@ -96,7 +96,6 @@ INSERT INTO discounts (code, type, value, expires_at, is_active, min_order_value
 
 
 -- Thêm dữ liệu mẫu cho bảng vehicles
--- Các ID sẽ tự động được gán từ 1, 2, 3...
 INSERT INTO vehicles (name, license_plate, type, capacity, transmission, fuel_type, price_per_day, image_url) VALUES
 ('Honda Air Blade', '59-A1 123.45', 'Xe máy', 2, 'Tự động', 'Xăng', 150000.00, 'images/11.png'),
 ('Toyota Vios', '51-B1 678.90', 'Ô tô 4 chỗ', 4, 'Tự động', 'Xăng', 700000.00, 'images/2.png'),

@@ -1,19 +1,12 @@
-/*
-======================
-  VEHICLE RENTAL THEME
-  Blog Styles
-======================
-*/
 
-/* Import biến màu và style chung từ style.css */
 @import url("style.css");
 
 :root {
-    --primary-color: #6C7EFF; /* Màu xanh tím */
-    --primary-color-rgb: 108, 126, 255; /* Thêm biến RGB cho primary-color */
-    --primary-dark: #4A5CDA; /* Màu xanh tím đậm hơn */
-    --primary-light: #A7B6FF; /* Màu xanh tím nhạt hơn */
-    --accent-color: #FF6B6B; /* Màu đỏ cam làm điểm nhấn */
+    --primary-color: #6C7EFF;
+    --primary-color-rgb: 108, 126, 255;
+    --primary-dark: #4A5CDA;
+    --primary-light: #A7B6FF;
+    --accent-color: #FF6B6B;
     --text-color: #333;
     --light-gray: #eee;
     --dark-gray: #555;
@@ -33,10 +26,8 @@
     --font-accent: 'Playfair Display', serif;
     --transition: all 0.3s ease-in-out;
 }
-/* END COLOR OVERRIDES */
 
-
-/* Header styles (matching blog.css and account.css for consistency) */
+/* Header styles  */
 header.main-header {
   background: linear-gradient(135deg, var(--primary-dark), var(--primary-color));
   padding: var(--spacing-lg) 0;
@@ -95,7 +86,7 @@ nav {
     border-bottom: 1px solid var(--light-gray);
     margin-bottom: var(--spacing-lg);
 
-     position: sticky; /* giữ thanh header đứng im trong nav*/
+     position: sticky;
     top: 0;
     z-index: 1000;
     background-color: white;
@@ -121,7 +112,7 @@ nav {
 
 .nav-item.active {
     color: var(--white);
-    background: linear-gradient(45deg, var(--primary-dark), var(--primary-color)); 
+    background: linear-gradient(45deg, var(--primary-dark), var(--primary-color));
     box-shadow: var(--shadow-md);
     transform: translateY(-2px);
 }
@@ -139,7 +130,7 @@ nav {
 }
 
 .nav-item.active::after {
-    width: calc(100% - 2 * var(--spacing-sm)); 
+    width: calc(100% - 2 * var(--spacing-sm));
 }
 
 .nav-item i {
@@ -260,7 +251,6 @@ nav {
 /* Footer */
 
 
-
 /* Thêm cho mobile dropdown */
 @media (max-width: 768px) {
     nav {
@@ -309,26 +299,24 @@ nav {
         text-decoration: none;
         width: 100%;
     }
-}
+
+    .blog-post { padding: var(--spacing-md); }
+    .blog-post h3 { font-size: 20px; padding-left: var(--spacing-sm); }
+    .blog-post p { font-size: 15px; }
+
+    .site-title { font-size: 40px; }
 
 
-.blog-post { padding: var(--spacing-md); }
-.blog-post h3 { font-size: 20px; padding-left: var(--spacing-sm); }
-.blog-post p { font-size: 15px; }
-
-.site-title { font-size: 40px; }
-}
-
-.container {
+    .container {
          padding: 0 var(--spacing-sm);
     }
      .filter-controls {
          gap: var(--spacing-sm);
-         padding: var(--spacing-sm); /* Thêm padding cho mobile */
+         padding: var(--spacing-sm);
      }
     .filter-controls input[type="text"],
     .filter-controls select {
-         min-width: unset; /* Bỏ min-width để giãn nở tốt hơn */
+         min-width: unset; 
          padding: 8px;
          font-size: 0.9em;
     }
@@ -350,7 +338,7 @@ nav {
         font-size: 24px;
     }
     header .logo h1 { font-size: 30px; }
-    header .logo .slogan { display: none; } /* Ẩn slogan trên mobile nhỏ */
+    header .logo .slogan { display: none; } 
     .header-right-items .btn { padding: var(--spacing-sm); font-size: 0.9em; }
 }
 @media (max-width: 576px) {
@@ -456,20 +444,10 @@ footer {
     flex-direction: column;
     align-items: center;
     text-align: center;
-    color: none;
   }
 
   .footer-column {
     margin-bottom: 20px;
   }
+ 
 }
-
-
-.footer-column a {
-      text-decoration: none;
-      color: #007bff;
-    }
-
-    .footer-column a:hover {
-      text-decoration: underline;
-    }

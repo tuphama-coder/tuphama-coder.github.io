@@ -1,20 +1,10 @@
-/*
-======================
-  VEHICLE RENTAL THEME
-  Account Styles - Updated to match Blog Theme
-======================
-*/
-
-/* Import biến màu và style chung từ style.css */
 @import url("style.css");
-
-/* Override biến màu để khớp với blog.css */
 :root {
-    --primary-color: #6C7EFF; /* Màu xanh tím */
-    --primary-color-rgb: 108, 126, 255; /* Thêm biến RGB cho primary-color */
-    --primary-dark: #4A5CDA; /* Màu xanh tím đậm hơn */
-    --primary-light: #A7B6FF; /* Màu xanh tím nhạt hơn */
-    --accent-color: #FF6B6B; /* Màu đỏ cam làm điểm nhấn */
+    --primary-color: #6C7EFF; 
+    --primary-color-rgb: 108, 126, 255; 
+    --primary-dark: #4A5CDA; 
+    --primary-light: #A7B6FF; 
+    --accent-color: #FF6B6B;
     --text-color: #333;
     --light-gray: #eee;
     --dark-gray: #555;
@@ -34,10 +24,7 @@
     --font-accent: 'Playfair Display', serif;
     --transition: all 0.3s ease-in-out;
 }
-/* END COLOR OVERRIDES */
-
-
-/* Header styles (matching blog.css and account.css for consistency) */
+/* Header style */
 header.main-header {
   background: linear-gradient(135deg, var(--primary-dark), var(--primary-color));
   padding: var(--spacing-lg) 0;
@@ -87,7 +74,7 @@ header.main-header::before {
     font-weight: 400;
 }
 
-/* Nav styles (replaces original nav comments) */
+/* Nav styles  */
 nav {
     background-color: var(--white);
     box-shadow: var(--shadow-sm);
@@ -96,7 +83,7 @@ nav {
     border-bottom: 1px solid var(--light-gray);
     margin-bottom: var(--spacing-lg);
 
-     position: sticky; /* giữ thanh header đứng im trong nav*/
+     position: sticky; 
     top: 0;
     z-index: 1000;
     background-color: white;
@@ -404,20 +391,16 @@ nav {
     color: var(--white);
 }
 
-/* Trong account.css hoặc style.css */
+
 .tab-content {
-    display: none; /* Mặc định ẩn tất cả các tab content */
-    /* Các thuộc tính style khác */
+    display: none; 
     padding: var(--spacing-md);
     background-color: var(--white);
     border-radius: var(--radius-md);
     box-shadow: var(--shadow-sm);
 }
 
-/* Chỉ hiển thị tab content khi nó được JavaScript thêm style display: block */
-/* (hoặc một class nào đó như .tab-content.active-tab nếu bạn dùng class) */
 
-/* Style cho phần Lịch sử đặt xe (thay thế Đơn hàng) */
 #orders h3 {
      font-family: var(--font-accent);
      color: var(--primary-dark);
@@ -720,7 +703,7 @@ nav {
 .level-item p { font-size: 0.95em; color: var(--dark-gray); margin-bottom: var(--spacing-xs); }
 
 
-/* Style cho phần Câu hỏi thường gặp */
+
 #faq h3 {
      font-family: var(--font-accent); color: var(--primary-dark); margin-bottom: var(--spacing-md);
      position: relative; padding-bottom: var(--spacing-sm); font-size: 28px;
@@ -755,7 +738,7 @@ nav {
 }
 
 
-/* Style cho phần đánh giá sao trong form */
+
 .rating {
     display: flex;
     flex-direction: row-reverse;
@@ -776,34 +759,32 @@ nav {
     transition: color 0.2s ease-in-out;
 }
 
-/* Hover effect: Khi di chuột qua ngôi sao, ngôi sao đó và tất cả các ngôi sao phía trước nó sẽ sáng lên */
 .rating label:hover,
 .rating label:hover ~ label {
     color: var(--warning);
 }
 
-/* Checked effect: Khi một ngôi sao được chọn, ngôi sao đó và tất cả các ngôi sao phía trước nó sẽ sáng lên */
+
 .rating input[type="radio"]:checked ~ label {
     color: var(--warning);
 }
 
-/* Điều chỉnh lại cho chắc chắn, đôi khi '~ label' cần cụ thể hơn */
-/* Đảm bảo khi một radio được chọn, tất cả các label sau nó (trong thứ tự HTML gốc) cũng sáng */
+
 .rating input[type="radio"]:checked ~ label {
     color: var(--warning);
 }
 
-/* Nếu bạn muốn hiệu ứng hover ưu tiên hơn khi đã chọn, có thể thêm: */
+
 .rating input[type="radio"]:checked + label:hover,
 .rating input[type="radio"]:checked + label:hover ~ label {
     color: #ffd700;
 }
 
-/* Style cho các icon ngôi sao bên trong label */
+
 .rating label i.fas.fa-star {
 }
 
-/* Đảm bảo rằng star-rating trong phần hiển thị reviews cũng sử dụng màu warning */
+
 .review-item .star-rating {
     color: var(--warning);
     margin: var(--spacing-sm) 0;
@@ -859,17 +840,6 @@ nav {
         width: 100%;
     }
 }
-
-
-/* Star Rating Input (Giữ nguyên style) */
-/* .rating { ... } */
-/* .rating > input { ... } */
-/* .rating > label { ... } */
-/* .rating > label:before { ... } */
-/* .rating > input:checked ~ label, ... { ... } */
-/* .rating i { ... } */
-/* @media (max-width: 576px) { ... } */
-
 
 /** footer **/
 
@@ -945,7 +915,6 @@ footer {
   transform: scale(1.1);
 }
 
-/* Phần chữ copyright canh giữa */
 .footer-bottom {
   background-color: #000;
   color: #fff;
@@ -966,7 +935,6 @@ footer {
     flex-direction: column;
     align-items: center;
     text-align: center;
-    color: none;
   }
 
   .footer-column {

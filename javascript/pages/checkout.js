@@ -1,11 +1,11 @@
-// common/utils.js cần có showLoading và hideLoading
+
 import { formatPrice, isLoggedIn, redirectToPage, showToast, showError, hideError, getUrlParameter, validateForm, showLoading, hideLoading } from '../common/utils.js';
 
-// Export default function để có thể import trong HTML
+
 export default async function initializeCheckoutPage() {
     console.log('Checkout page initialized.');
 
-    // Element selectors
+    
     const bookingForm = document.getElementById('payment-form');
     const bookingSummaryElement = document.getElementById('order-summary');
     const discountCodeInput = document.getElementById('discount-code');
@@ -40,21 +40,20 @@ export default async function initializeCheckoutPage() {
     const startDateInput = document.getElementById('start-date');
     const endDateInput = document.getElementById('end-date');
 
-    // State variables
+
     let selectedVehicle = null;
     let appliedDiscount = 0;
     let discountCode = null;
     let calculatedTotalPrice = 0;
     let otpInterval = null;
 
-    // Danh sách mã giảm giá (frontend-only, backend sẽ kiểm tra lại)
+   
     const discountCodesFrontend = {
         'THUEXE20': { type: 'percentage', value: 20 },
         'GIAM10': { type: 'fixed', value: 100000 },
         'FREESHIP': { type: 'shipping', value: 0 }
     };
 
-    // --- Helper Functions (defined before they are called) ---
 
     // Hàm này gọi API để lấy chi tiết xe
     async function fetchVehicleDetails(vehicleId) {
@@ -72,8 +71,6 @@ export default async function initializeCheckoutPage() {
             selectedVehicle = await response.json();
             console.log('Fetched vehicle details:', selectedVehicle);
 
-            // KHÔNG CẦN GỌI displayBookingSummary() Ở ĐÂY.
-            // setupDateListeners() sẽ gọi handleDateChange() -> validateAndCalculateBookingDates() -> displayBookingSummary() với đầy đủ dữ liệu.
 
         } catch (error) {
             console.error(`Lỗi khi tải chi tiết xe với ID ${vehicleId}:`, error);
@@ -85,7 +82,7 @@ export default async function initializeCheckoutPage() {
         }
     }
 
-    // Hàm tính số ngày thuê (client-side)
+    // Hàm tính số ngày thuê 
     function calculateDurationInDaysClient(startDateString, endDateString) {
         if (!startDateString || !endDateString) return 0;
         try {
@@ -117,31 +114,30 @@ export default async function initializeCheckoutPage() {
             if (isNaN(start.getTime()) || isNaN(end.getTime())) {
                 showToast('Định dạng ngày hoặc giờ không hợp lệ.', 'error');
                 calculatedTotalPrice = 0;
-                displayBookingSummary(); // Gọi để reset summary
+                displayBookingSummary(); 
                 return;
             }
 
             // Kiểm tra ngày bắt đầu không được trong quá khứ so với hiện tại
             if (start < now) {
                 showToast('Ngày giờ nhận xe không thể ở trong quá khứ.', 'error');
-                startDateInput.value = ''; // Xóa giá trị sai
+                startDateInput.value = ''; 
                 calculatedTotalPrice = 0;
-                displayBookingSummary(); // Gọi để reset summary
+                displayBookingSummary(); 
                 return;
             }
 
             // Kiểm tra ngày kết thúc phải sau ngày bắt đầu
             if (end <= start) {
                 showToast('Ngày giờ trả xe phải sau ngày giờ nhận xe.', 'error');
-                endDateInput.value = ''; // Xóa giá trị sai
+                endDateInput.value = ''; 
                 calculatedTotalPrice = 0;
-                displayBookingSummary(); // Gọi để reset summary
+                displayBookingSummary(); 
                 return;
             }
 
             const durationInMs = end.getTime() - start.getTime();
             const durationInHours = durationInMs / (1000 * 60 * 60);
-            // Làm tròn lên số ngày, ví dụ 24.1 giờ vẫn tính là 2 ngày
             const durationInDays = Math.ceil(durationInHours / 24);
             console.log(`Thời gian thuê (giờ): ${durationInHours}, Thời gian thuê (ngày, làm tròn lên): ${durationInDays}`);
 
@@ -167,14 +163,14 @@ export default async function initializeCheckoutPage() {
                         appliedDiscount = Math.min(discountInfo.value, basePrice);
                     }
                 } else {
-                    discountCode = null; // Reset nếu mã không hợp lệ
+                    discountCode = null; 
                     if (discountCodeInput) discountCodeInput.value = '';
                     showToast('Mã giảm giá không hợp lệ hoặc không còn hiệu lực.', 'warning');
                 }
             }
 
             calculatedTotalPrice = basePrice - appliedDiscount;
-            calculatedTotalPrice = Math.max(0, calculatedTotalPrice); // Đảm bảo tổng tiền không âm
+            calculatedTotalPrice = Math.max(0, calculatedTotalPrice); 
 
             displayBookingSummary({ startDate: startDateString, endDate: endDateString, duration: durationInDays, basePrice: basePrice, discount: appliedDiscount, total: calculatedTotalPrice });
 
@@ -213,7 +209,6 @@ export default async function initializeCheckoutPage() {
         const tomorrow = new Date(now);
         tomorrow.setDate(tomorrow.getDate() + 1);
 
-        // Format sang ISO-MM-DDTHH:mm cho input datetime-local
         const formatDateTimeLocal = (date) => {
             const year = date.getFullYear();
             const month = String(date.getMonth() + 1).padStart(2, '0');
@@ -223,15 +218,12 @@ export default async function initializeCheckoutPage() {
             return `${year}-${month}-${day}T${hours}:${minutes}`;
         };
 
-        // Đặt giá trị min cho phép chọn từ thời điểm hiện tại trở đi
         startDateInput.setAttribute('min', formatDateTimeLocal(now));
         endDateInput.setAttribute('min', formatDateTimeLocal(tomorrow));
 
-        // Đặt giá trị mặc định ban đầu để tránh trường trống
         startDateInput.value = formatDateTimeLocal(now);
         endDateInput.value = formatDateTimeLocal(tomorrow);
 
-        // Kích hoạt tính toán giá ngay lần đầu tải trang
         handleDateChange();
 
         startDateInput.addEventListener('change', handleDateChange);
@@ -411,7 +403,6 @@ export default async function initializeCheckoutPage() {
             paymentMethodDetailsElement.querySelector('.copy-btn')?.addEventListener('click', copyMomoContent);
 
         } else if (paymentMethod === 'credit-card') {
-            // Theo như checkout.html đã xóa tùy chọn Credit Card, nhưng giữ lại logic phòng trường hợp cần
             paymentMethodDetailsElement.innerHTML = `
                 <div class="payment-details credit-card">
                     <h4>Thanh toán bằng thẻ tín dụng</h4>
@@ -423,8 +414,7 @@ export default async function initializeCheckoutPage() {
                 </div>
             `;
         }
-        // Sau khi thay đổi phương thức thanh toán, hãy cập nhật trạng thái của nút "Xác nhận đặt xe"
-        handleDateChange(); // Kích hoạt lại tính toán và cập nhật summary/nút
+        handleDateChange(); 
     };
 
     const setupDiscountCodeValidation = () => {
@@ -440,7 +430,7 @@ export default async function initializeCheckoutPage() {
             } else {
                 showToast('Mã giảm giá không hợp lệ.', 'error');
             }
-            handleDateChange(); // Kích hoạt tính toán lại giá sau khi áp dụng mã
+            handleDateChange(); 
         });
     };
 
@@ -458,11 +448,10 @@ export default async function initializeCheckoutPage() {
             'end-date': { required: true, errorMessage: 'Vui lòng chọn Ngày giờ trả xe.' }
         };
 
-        // Xóa tất cả các lỗi trước khi xác thực
         Object.keys(rules).forEach(fieldId => hideError(fieldId));
         hideError('otp-input');
 
-        isValid = validateForm(rules); // Sử dụng hàm validateForm từ utils.js
+        isValid = validateForm(rules); 
 
         const start = startDateInput ? new Date(startDateInput.value) : null;
         const end = endDateInput ? new Date(endDateInput.value) : null;
@@ -490,7 +479,7 @@ export default async function initializeCheckoutPage() {
         }
 
         // Kiểm tra tổng tiền
-        if (calculatedTotalPrice <= 0 && paymentMethod !== 'cod') { // Cho phép COD nếu tổng tiền = 0
+        if (calculatedTotalPrice <= 0 && paymentMethod !== 'cod') { 
              if (calculatedTotalPrice < 0) {
                   showToast('Tổng tiền thanh toán không hợp lệ.', 'error');
                   isValid = false;
@@ -517,22 +506,6 @@ export default async function initializeCheckoutPage() {
 
         showLoading();
         try {
-            // Đây là một endpoint giả định để kiểm tra tính sẵn có.
-            // Trong thực tế, bạn sẽ cần một API backend để làm điều này.
-            // Ví dụ: `GET /api/vehicles/available?vehicleId=X&startDate=Y&endDate=Z`
-            // Hiện tại không có endpoint này trong server.js, nên ta sẽ bỏ qua bước này
-            // hoặc giả định luôn có sẵn (tùy theo yêu cầu của bạn).
-            // Nếu bạn muốn triển khai, cần tạo endpoint này ở backend.
-            // Ví dụ:
-            // const response = await fetch(`http://localhost:5000/api/vehicles/available?vehicleId=${selectedVehicle.id}&startDate=${encodeURIComponent(start)}&endDate=${encodeURIComponent(end)}`);
-            // if (!response.ok) { /* handle error */ }
-            // const result = await response.json();
-            // return result.isAvailable; // Giả định API trả về { isAvailable: true/false }
-
-            // Đối với mục đích hiện tại, chúng ta sẽ giả định xe luôn có sẵn.
-            // Bạn có thể thêm logic kiểm tra API thực tế ở đây nếu cần.
-
-            // Mô phỏng độ trễ kiểm tra
             await new Promise(resolve => setTimeout(resolve, 500));
             console.log('Kiểm tra tình trạng cuối cùng thành công (mô phỏng).');
             return true;
@@ -549,9 +522,6 @@ export default async function initializeCheckoutPage() {
     async function submitBooking(bookingData) {
         console.log('Đang gửi đặt xe lên backend...', bookingData);
         showLoading();
-
-        // customerInfo đã được chuẩn bị trước đó trong processBooking
-        // và được gán vào bookingData.customerInfo
         const customerInfoJson = bookingData.customerInfo;
 
 
@@ -564,12 +534,12 @@ export default async function initializeCheckoutPage() {
                     vehicleId: bookingData.vehicleId,
                     startDate: bookingData.startDate,
                     endDate: bookingData.endDate,
-                    customerInfo: customerInfoJson, // Đã bao gồm paymentMethod và các thông tin khách hàng khác
+                    customerInfo: customerInfoJson, 
                     discountCode: bookingData.discountCode,
                     subtotal: bookingData.subtotal,
                     discount: bookingData.discount,
                     finalTotal: bookingData.finalTotal,
-                    status: 'Pending', // Trạng thái ban đầu của đơn hàng
+                    status: 'Pending',
                 })
             });
 
@@ -578,7 +548,7 @@ export default async function initializeCheckoutPage() {
             if (response.ok && result.bookingId) {
                 console.log('Đặt xe thành công:', result);
                 showToast('Đặt xe thành công!', 'success');
-                saveCustomerInfo(); // Lưu thông tin khách hàng cho lần sau
+                saveCustomerInfo(); 
                 showSuccessModal(result.bookingId);
             } else {
                 console.error('Gửi đặt xe thất bại:', response.status, result.error);
@@ -606,8 +576,6 @@ export default async function initializeCheckoutPage() {
             };
             localStorage.setItem('customerInfo', JSON.stringify(customerInfoToSave));
         } else {
-            // Có thể xóa thông tin nếu checkbox không được chọn
-            // localStorage.removeItem('customerInfo');
         }
     }
 
@@ -648,15 +616,13 @@ export default async function initializeCheckoutPage() {
 
         confirmModal.style.display = 'flex';
 
-        // Xóa listener cũ để tránh trùng lặp
         const oldConfirmListener = confirmBookingBtn._confirmListener;
         if (oldConfirmListener) confirmBookingBtn.removeEventListener('click', oldConfirmListener);
 
         const newConfirmListener = () => {
             confirmModal.style.display = 'none';
 
-            // Chỉ hiển thị OTP nếu phương thức thanh toán KHÔNG phải là COD
-            if (['momo', 'bank-transfer'].includes(bookingData.customerInfo.paymentMethod)) { // Thêm cả bank-transfer nếu cần OTP
+            if (['momo', 'bank-transfer'].includes(bookingData.customerInfo.paymentMethod)) { 
                 showOTPModal(bookingData);
             } else {
                 submitBooking(bookingData);
@@ -670,7 +636,7 @@ export default async function initializeCheckoutPage() {
     function startOtpTimer() {
         otpCountdown = 60;
         if (otpTimer) otpTimer.textContent = otpCountdown;
-        if (otpInterval) clearInterval(otpInterval); // Xóa timer cũ nếu có
+        if (otpInterval) clearInterval(otpInterval); 
 
         otpInterval = setInterval(() => {
             otpCountdown--;
@@ -680,8 +646,6 @@ export default async function initializeCheckoutPage() {
                 clearInterval(otpInterval);
                 if (otpTimer) otpTimer.textContent = 'hết hạn';
                 showToast('Mã OTP đã hết hạn. Vui lòng thử lại.', 'warning');
-                // Có thể tự động đóng modal OTP nếu muốn
-                // if (otpModal) otpModal.style.display = 'none';
             }
         }, 1000);
     }
@@ -694,7 +658,7 @@ export default async function initializeCheckoutPage() {
         hideError('otp-input');
 
         startOtpTimer();
-        otpModal._bookingData = bookingData; // Lưu dữ liệu đặt xe vào modal để dùng sau
+        otpModal._bookingData = bookingData; 
     }
 
     async function handleOtpConfirmation() {
@@ -708,7 +672,7 @@ export default async function initializeCheckoutPage() {
         }
 
         const bookingData = otpModal._bookingData;
-        if (!bookingData || !bookingData.customerInfo || !bookingData.customerInfo.email) { // Cần email để xác minh OTP
+        if (!bookingData || !bookingData.customerInfo || !bookingData.customerInfo.email) { 
             console.error('Không tìm thấy dữ liệu đặt xe hoặc email trên modal OTP.');
             showError('otp-input', 'Lỗi hệ thống: Không tìm thấy thông tin đặt xe hoặc email.');
             return;
@@ -720,17 +684,16 @@ export default async function initializeCheckoutPage() {
             const response = await fetch('http://localhost:5000/api/users/verify-otp', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ email: bookingData.customerInfo.email, otp: otp }) // Sử dụng email từ customerInfo
+                body: JSON.stringify({ email: bookingData.customerInfo.email, otp: otp }) 
             });
             const result = await response.json().catch(() => ({}));
 
             if (response.ok) {
-                clearInterval(otpInterval); otpInterval = null; // Dừng timer
+                clearInterval(otpInterval); otpInterval = null; 
                 if (otpModal) otpModal.style.display = 'none';
                 if (otpInput) otpInput.value = '';
                 showToast('Xác nhận OTP thành công!');
 
-                // Sau khi xác nhận OTP, tiến hành gửi đơn hàng
                 submitBooking(bookingData);
 
             } else {
@@ -760,7 +723,7 @@ export default async function initializeCheckoutPage() {
         if (cancelConfirm) cancelConfirm.addEventListener('click', () => { if (confirmModal) confirmModal.style.display = 'none'; });
 
         if (cancelOtp) cancelOtp.addEventListener('click', () => {
-            clearInterval(otpInterval); otpInterval = null; // Dừng timer OTP
+            clearInterval(otpInterval); otpInterval = null; 
             if (otpModal) otpModal.style.display = 'none';
             if (otpInput) otpInput.value = '';
             hideError('otp-input');
@@ -798,7 +761,6 @@ export default async function initializeCheckoutPage() {
         // Lấy phương thức thanh toán đã chọn
         const paymentMethod = document.querySelector('input[name="payment-method"]:checked')?.value;
 
-        // TẠO đối tượng customerInfoJson chứa tất cả thông tin khách hàng và phương thức thanh toán
         const customerInfoJson = {
             name: customerNameInput?.value.trim(),
             phone: customerPhoneInput?.value.trim().replace(/[\s-]/g, ''),
@@ -817,7 +779,7 @@ export default async function initializeCheckoutPage() {
             vehicleId: selectedVehicle.id,
             startDate: startDateInput?.value,
             endDate: endDateInput?.value,
-            customerInfo: customerInfoJson, // Gán đối tượng customerInfo đã hoàn chỉnh
+            customerInfo: customerInfoJson, 
             discountCode: discountCodeInput?.value.trim() || null,
             subtotal: (calculateDurationInDaysClient(startDateInput?.value, endDateInput?.value) || 0) * (selectedVehicle.price_per_day || 0),
             discount: appliedDiscount,
@@ -828,8 +790,6 @@ export default async function initializeCheckoutPage() {
         showConfirmModal(bookingData);
     };
 
-
-    // --- Khởi tạo trang (Order of execution) ---
 
     if (!isLoggedIn()) {
         showToast('Vui lòng đăng nhập để đặt xe.', 'error');
@@ -845,10 +805,10 @@ export default async function initializeCheckoutPage() {
         return;
     }
 
-    // Fetch thông tin xe từ API backend
+ 
     await fetchVehicleDetails(vehicleId);
 
-    // Setup listeners and autofill after vehicle details are fetched
+   
     setupDateListeners();
     autofillCustomerInfo();
     displayPaymentMethodDetails();
@@ -862,7 +822,7 @@ export default async function initializeCheckoutPage() {
         console.error('Booking form not found.');
     }
 
-    // Thêm listener cho các nút radio phương thức thanh toán
+    
     document.querySelectorAll('input[name="payment-method"]').forEach(method => {
         method.addEventListener('change', displayPaymentMethodDetails);
     });

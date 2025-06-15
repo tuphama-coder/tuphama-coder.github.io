@@ -43,9 +43,6 @@ document.addEventListener('DOMContentLoaded', () => {
     let facebookInitialized = false;
     let isLoadingOrders = false;
 
-    // Helper functions (showToast, showError, hideError, showLoading, hideLoading)
-    // These functions are similar to those in utils.js but are defined here for self-containment
-    // as seen in the original `account.js` and `payment.js` files.
     const showToast = (message, type = 'success', duration = 3000) => {
         if (!toast || !toastMessage) {
             console.error('Không tìm thấy toast hoặc toastMessage');
@@ -113,7 +110,6 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     const isValidPhone = (phone) => {
-        // Allow phone numbers with spaces and hyphens, but validate only digits
         const cleanedPhone = phone.replace(/[\s-]/g, '');
         return /^\+?\d{10,15}$/.test(cleanedPhone);
     };
@@ -159,11 +155,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const defaultTab = document.querySelector('.account-tabs .tab-btn[data-tab="profile"]');
             if (defaultTab) {
-                // Manually trigger click to load default tab content
                 defaultTab.click();
             } else {
                 console.warn('Default profile tab button not found.');
-                // Fallback: just ensure account section is visible
                 accountSection.style.display = 'block';
             }
             initializeFaqAccordion();
@@ -178,7 +172,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (loginBtn) loginBtn.classList.add('active');
             if (registerBtn) registerBtn.classList.remove('active');
 
-            // Clear previous errors on all auth forms when switching to auth section
+         
             hideError(loginError);
             hideError(registerError);
             hideError(forgotError);
@@ -186,9 +180,9 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
-    const loadProfile = async () => { // Đã bỏ tham số userId
+    const loadProfile = async () => { 
         const user = JSON.parse(localStorage.getItem('user') || '{}');
-        const userId = user.id; // Lấy userId từ localStorage
+        const userId = user.id; 
         console.log('Tải hồ sơ cho người dùng ID:', userId);
 
         if (!userId) {
@@ -202,7 +196,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const errorData = await response.json().catch(() => ({ error: 'Lỗi không xác định' }));
                 throw new Error(`Lỗi tải hồ sơ: ${errorData.error || response.statusText}`);
             }
-            const userDetails = await response.json(); // Đổi tên biến để tránh trùng user từ localStorage
+            const userDetails = await response.json(); 
             console.log('loadProfile: Dữ liệu người dùng đã nhận:', userDetails);
 
             const profileName = document.getElementById('profile-name');
@@ -260,7 +254,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 const result = await response.json().catch(() => ({}));
 
                 if (response.ok) {
-                    // Update localStorage with new info from the form
                     const updatedUser = { ...user, name, phone, address, notifications };
                     localStorage.setItem('user', JSON.stringify(updatedUser));
                     showToast('Cập nhật hồ sơ thành công!');
@@ -458,8 +451,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 const targetButton = event.target.closest('.cancel-order');
                 if (!targetButton) return;
 
-                const orderId = parseInt(targetButton.dataset.orderId); // Convert to integer
-                if (isNaN(orderId)) { // Check if conversion was successful
+                const orderId = parseInt(targetButton.dataset.orderId); 
+                if (isNaN(orderId)) { 
                     console.error('Invalid orderId found in dataset of cancel button.');
                     showToast('Lỗi: Không thể xác định đặt xe cần hủy.', 'error');
                     return;
@@ -491,7 +484,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     return;
                 }
 
-                // Parse customer_info if it's a string
+               
                 const customerInfo = typeof order.customer_info === 'string' ? JSON.parse(order.customer_info) : order.customer_info;
 
 
@@ -501,7 +494,6 @@ document.addEventListener('DOMContentLoaded', () => {
                             <h4>Thông tin xe đã đặt</h4>
                             <div class="order-items-detail-list">
                                 ${order.items.map(item => {
-                                    // Assuming item.name, item.price, item.quantity exist for each item in the order
                                     if (!item.name || item.price === undefined || item.quantity === undefined) {
                                         console.warn('view-details: Dữ liệu item không đầy đủ:', item);
                                         return '<div class="order-item-detail"><span>Xe không hợp lệ</span><span>N/A</span></div>';
@@ -561,8 +553,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 const targetButton = event.target.closest('.cancel-order');
                 if (!targetButton) return;
 
-                const orderId = parseInt(targetButton.dataset.orderId); // Chuyển đổi sang số nguyên
-                if (isNaN(orderId)) { // Kiểm tra xem việc chuyển đổi có thành công không
+                const orderId = parseInt(targetButton.dataset.orderId); 
+                if (isNaN(orderId)) { 
                     console.error('Invalid orderId found in dataset of cancel button.');
                     showToast('Lỗi: Không thể xác định đặt xe cần hủy.', 'error');
                     return;
@@ -585,7 +577,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         const response = await fetch(`http://localhost:5000/api/orders/${orderId}`, {
                             method: 'PUT',
                             headers: { 'Content-Type': 'application/json' },
-                            body: JSON.stringify({ status: 'Cancelled' }) // Cập nhật trạng thái thành 'Cancelled'
+                            body: JSON.stringify({ status: 'Cancelled' }) 
                         });
 
                         hideLoading();
@@ -594,8 +586,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
                         if (response.ok) {
                             showToast(`Lượt đặt xe #${orderId} đã được hủy thành công!`, 'success');
-                            loadOrders(); // Tải lại danh sách đơn hàng
-                            loadMembershipLevels(); // Re-calculate membership levels if cancellation affects total spent
+                            loadOrders();
+                            loadMembershipLevels(); 
                         } else {
                             console.error(`Lỗi khi hủy đặt xe ${orderId}: ${response.status} - ${response.statusText}`, result);
                             showToast(`Không thể hủy đặt xe #${orderId}. Lỗi: ${result.error || 'Không rõ'}`, 'error');
@@ -784,22 +776,22 @@ document.addEventListener('DOMContentLoaded', () => {
             console.error('Không tìm thấy #review-vehicle-select trong DOM.');
             return;
         }
-        vehicleSelectElement.innerHTML = '<option value="">-- Đang tải danh sách xe --</option>'; // Trạng thái tải
+        vehicleSelectElement.innerHTML = '<option value="">-- Đang tải danh sách xe --</option>'; 
 
         try {
-            const response = await fetch('http://localhost:5000/api/vehicles'); // Lấy tất cả xe
+            const response = await fetch('http://localhost:5000/api/vehicles'); 
             if (!response.ok) {
                 throw new Error('Không thể tải danh sách xe.');
             }
             const vehicles = await response.json();
 
-            vehicleSelectElement.innerHTML = '<option value="">-- Chọn xe --</option>'; // Reset dropdown
+            vehicleSelectElement.innerHTML = '<option value="">-- Chọn xe --</option>';
 
             if (Array.isArray(vehicles) && vehicles.length > 0) {
                 vehicles.forEach(vehicle => {
                     const option = document.createElement('option');
-                    option.value = vehicle.id; // Giá trị là ID của xe
-                    option.textContent = `${vehicle.name} (${vehicle.license_plate || 'Không biển số'})`; // Hiển thị tên và biển số
+                    option.value = vehicle.id;
+                    option.textContent = `${vehicle.name} (${vehicle.license_plate || 'Không biển số'})`; 
                     vehicleSelectElement.appendChild(option);
                 });
             } else {
@@ -851,18 +843,15 @@ document.addEventListener('DOMContentLoaded', () => {
             }
              console.log(`Tìm thấy ${reviews.length} đánh giá.`);
 
-            // Sử dụng Promise.all để lấy thông tin xe cho từng đánh giá
             const reviewsWithVehicleNames = await Promise.all(reviews.map(async (review) => {
-                // Cập nhật kiểm tra: review.product không còn được dùng, thay bằng review.vehicle_id
                 if (!review.id || review.rating === undefined || review.comment === undefined || review.vehicle_id === undefined) {
                     console.warn('Bỏ qua hiển thị dữ liệu đánh giá không đầy đủ:', review);
-                    return null; // Bỏ qua đánh giá không hợp lệ
+                    return null; 
                 }
 
                 let vehicleName = 'Xe không xác định';
                 if (review.vehicle_id) {
                     try {
-                        // Gọi API để lấy thông tin xe dựa trên vehicle_id
                         const vehicleResponse = await fetch(`http://localhost:5000/api/vehicles/${review.vehicle_id}`);
                         if (vehicleResponse.ok) {
                             const vehicleData = await vehicleResponse.json();
@@ -875,10 +864,9 @@ document.addEventListener('DOMContentLoaded', () => {
                     }
                 }
 
-                return { ...review, vehicleName }; // Thêm tên xe vào đối tượng review
+                return { ...review, vehicleName }; 
             }));
 
-            // Lọc bỏ các đánh giá bị bỏ qua (null)
             const validReviews = reviewsWithVehicleNames.filter(review => review !== null);
 
             validReviews.forEach(review => {
@@ -947,12 +935,12 @@ document.addEventListener('DOMContentLoaded', () => {
              const commentInput = document.getElementById('review-comment');
              const ratingInput = document.querySelector('input[name="rating"]:checked');
 
-             const vehicleId = parseInt(vehicleIdInput?.value.trim()); // Chuyển đổi sang số nguyên
+             const vehicleId = parseInt(vehicleIdInput?.value.trim()); 
              const rating = ratingInput?.value;
              const comment = commentInput?.value.trim();
 
            // Cập nhật kiểm tra hợp lệ
-           if (isNaN(vehicleId) || vehicleId <= 0 || !rating || !comment) { // Kiểm tra vehicleId là số dương hợp lệ
+           if (isNaN(vehicleId) || vehicleId <= 0 || !rating || !comment) { 
               const msg = 'Vui lòng điền đầy đủ thông tin đánh giá (ID xe hợp lệ, xếp hạng, nhận xét).';
               showToast(msg, 'error');
               hideLoading();
@@ -970,7 +958,7 @@ document.addEventListener('DOMContentLoaded', () => {
                  const response = await fetch(`http://localhost:5000/api/reviews/${user.id}`, {
                      method: 'POST',
                      headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ vehicleId, rating: parseInt(rating), comment }) // Gửi vehicleId thay vì product
+                    body: JSON.stringify({ vehicleId, rating: parseInt(rating), comment }) 
                  });
 
                  const result = await response.json().catch(() => ({}));
@@ -980,7 +968,7 @@ document.addEventListener('DOMContentLoaded', () => {
                      addReviewForm.reset();
                      document.querySelectorAll('input[name="rating"]:checked').forEach(radio => radio.checked = false);
 
-                     loadReviews(); // Tải lại danh sách đánh giá sau khi gửi thành công
+                     loadReviews(); 
                  } else {
                      console.error('Lỗi gửi đánh giá từ server:', response.status, result.error);
                       const msg = `Gửi đánh giá thất bại: ${result.error || 'Lỗi không xác định'}.`;
@@ -1035,8 +1023,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
               const userData = await response.json();
               const userCoupons = Array.isArray(userData.coupons) ? userData.coupons : [];
-              localStorage.setItem('user', JSON.stringify(userData)); // Update localStorage with fresh user data, including coupons
-
+              localStorage.setItem('user', JSON.stringify(userData)); 
 
               if (userCoupons.length === 0) {
                   couponList.innerHTML = '<p>Chưa có mã giảm giá nào được áp dụng.</p>';
@@ -1094,7 +1081,6 @@ document.addEventListener('DOMContentLoaded', () => {
                      if (!userResponse.ok) {
                           const errorData = await userResponse.json().catch(() => ({ error: 'Unknown error' }));
                           console.error(`Lỗi API khi fetch user để kiểm tra coupon: ${userResponse.status}`, errorData);
-                          // Không throw error, chỉ hiển thị toast và thoát
                           showToast(`Không thể kiểm tra mã giảm giá hiện tại: ${errorData.error || 'Lỗi không rõ'}`, 'error');
                           hideLoading();
                           return;
@@ -1164,7 +1150,6 @@ document.addEventListener('DOMContentLoaded', () => {
             const orders = await response.json();
 
             const totalSpent = orders.reduce((sum, order) => {
-                // Only count 'Completed' or 'Hoàn thành' orders towards total spent
                 if (order.status === 'Completed' || order.status === 'Hoàn thành' && order.total !== undefined && typeof order.total === 'number') {
                     return sum + order.total;
                 }
@@ -1187,8 +1172,8 @@ document.addEventListener('DOMContentLoaded', () => {
             let level, nextLevelThreshold, progressAmount, currentThreshold, nextLevelMessage, progressPercent;
 
             const silverThreshold = 0;
-            const goldThreshold = 10000000; // 10 million VND
-            const platinumThreshold = 30000000; // 30 million VND
+            const goldThreshold = 10000000; 
+            const platinumThreshold = 30000000; 
 
             if (totalSpent < goldThreshold) {
                 level = 'Bạc (Silver)';
@@ -1595,7 +1580,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 showToast('Không thể đăng nhập bằng Google. Vui lòng thử lại sau.', 'error');
                 return;
             }
-            // YOUR_GOOGLE_CLIENT_ID needs to be replaced with a real Google Client ID
             window.google.accounts.id.initialize({
                 client_id: 'YOUR_GOOGLE_CLIENT_ID',
                 callback: handleGoogleLogin
@@ -1732,7 +1716,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 switch (tabId) {
                     case 'profile':
-                        loadProfile(); // Đã sửa để không truyền userId
+                        loadProfile(); 
                          loadCoupons();
                         break;
                     case 'orders':
@@ -1743,20 +1727,17 @@ document.addEventListener('DOMContentLoaded', () => {
                         break;
                     case 'reviews':
                         loadReviews();
-                        populateVehicleDropdown(); // Gọi hàm này khi chuyển sang tab reviews
+                        populateVehicleDropdown(); 
                         break;
                     case 'membership-benefits':
-                        // No specific loading logic for static content
                         break;
                      case 'membership-levels':
                          loadMembershipLevels();
                          break;
                     case 'faq':
-                        // Initialize accordion for FAQ
                         initializeFaqAccordion();
                         break;
                     case 'logout':
-                        // Handled separately below
                          break;
                 }
 
@@ -1777,7 +1758,6 @@ document.addEventListener('DOMContentLoaded', () => {
                      const profileTabBtn = document.querySelector('.account-tabs .tab-btn[data-tab="profile"]');
                       if(profileTabBtn) profileTabBtn.click();
                       else {
-                          // Fallback if profile tab not found
                       }
                 }
             }

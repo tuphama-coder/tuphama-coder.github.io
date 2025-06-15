@@ -1,22 +1,14 @@
-/*
-======================
-  VEHICLE RENTAL THEME
-  Index Styles
-======================
-*/
 
-/* Import biến màu và style chung từ style.css */
 @import url("style.css");
 
-/* Định nghĩa lại các biến màu cho trang index để đồng bộ với blog */
 :root {
-    --primary-color: #6C7EFF; /* Màu xanh tím */
+    --primary-color: #6C7EFF; 
     --primary-color-rgb: 108, 126, 255;
-    --primary-dark: #4A5CDA; /* Màu xanh tím đậm hơn */
-    --primary-light: #A7B6FF; /* Màu xanh tím nhạt hơn */
-    --accent-color: #FF6B6B; /* Màu đỏ cam làm điểm nhấn */
+    --primary-dark: #4A5CDA; 
+    --primary-light: #A7B6FF; 
+    --accent-color: #FF6B6B; 
     --text-color: #333;
-    --light-gray: #eee; /* Màu nền chính cho body */
+    --light-gray: #eee; 
     --dark-gray: #555;
     --white: #ffffff;
 
@@ -41,7 +33,6 @@
     --transition: all 0.3s ease-in-out;
 }
 
-/* Áp dụng màu nền cho body của index.html */
 body {
     background-color: var(--light-gray);
     font-family: var(--font-body);
@@ -49,7 +40,7 @@ body {
     line-height: 1.6;
 }
 
-/* Header styles (matching blog.css and account.css for consistency) */
+/* Header styles  */
 header.main-header {
   background: linear-gradient(135deg, var(--primary-dark), var(--primary-color));
   padding: var(--spacing-lg) 0;
@@ -113,7 +104,7 @@ header.main-header::before {
     box-shadow: var(--shadow-sm);
 }
 
-/* Navigation styles (matching other pages) */
+/* Navigation styles  */
 nav {
     background-color: var(--white);
     box-shadow: var(--shadow-sm);
@@ -122,7 +113,7 @@ nav {
     border-bottom: 1px solid var(--light-gray);
     margin-bottom: var(--spacing-lg);
 
-    position: sticky; /* giữ thanh header đứng im trong nav*/
+    position: sticky;
     top: 0;
     z-index: 1000;
     background-color: white;
@@ -184,11 +175,11 @@ nav {
     text-align: center;
 }
 
-/* New styles for the video background */
-.banner-video { /* Changed from .banner-img to .banner-video */
+
+.banner-video { 
     width: 100%;
     height: 100%;
-    object-fit: cover; /* Ensures the video covers the entire container */
+    object-fit: cover; 
     position: absolute;
     top: 0;
     left: 0;
@@ -204,7 +195,7 @@ nav {
     max-width: 800px;
     margin: 0 var(--spacing-md);
     box-shadow: var(--shadow-lg);
-    z-index: 1; /* Ensure content is above the video */
+    z-index: 1; 
 }
 
 .banner-content h2 {

@@ -5,12 +5,11 @@ require('dotenv').config();
 
 const app = express();
 
-// Middleware
+
 app.use(cors());
 app.use(express.json());
 
-// API Routes
-// Users
+
 app.post('/api/users/register', async (req, res) => {
     try {
         const { name, email, phone, password, address, notifications } = req.body;
@@ -175,8 +174,7 @@ app.delete('/api/reviews/:id', async (req, res) => {
 app.get('/api/vehicles', async (req, res) => {
     try {
         console.log('Backend: Nhận yêu cầu GET /api/vehicles');
-        // Retrieve optional search and filter parameters from query
-        const { search, type } = req.query; // e.g., ?search=honda&type=Xe may
+        const { search, type } = req.query; 
 
         let query = 'SELECT * FROM vehicles';
         const queryParams = [];

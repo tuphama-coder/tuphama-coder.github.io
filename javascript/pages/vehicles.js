@@ -1,7 +1,6 @@
-import { formatPrice, redirectToPage, showToast, isLoggedIn } from '../common/utils.js'; // Added isLoggedIn
+import { formatPrice, redirectToPage, showToast, isLoggedIn } from '../common/utils.js'; 
 
-let allVehicles = []; // Biến này sẽ chứa dữ liệu xe (từ API hoặc từ hardcoded nếu API không có)
-
+let allVehicles = []; 
 export default function initVehiclesPage() {
     console.log('Trang danh sách xe đã được khởi tạo.');
 
@@ -10,7 +9,7 @@ export default function initVehiclesPage() {
         vehicleGrid.innerHTML = '<p style="text-align: center; color: var(--dark-gray);"><i class="fas fa-spinner fa-spin"></i> Đang tải danh sách xe...</p>';
     }
 
-    // Tải và render xe (Ưu tiên API, nếu không có thì dùng hardcoded từ window)
+  
     loadAndRenderVehicles();
     setupSearchAndFilter();
 }
@@ -24,7 +23,6 @@ async function loadAndRenderVehicles() {
     }
 
     try {
-        // Cố gắng fetch từ API
         const response = await fetch('http://localhost:5000/api/vehicles'); //
         if (!response.ok) {
             const errorData = await response.json().catch(() => ({ error: 'Unknown error' }));
@@ -35,26 +33,24 @@ async function loadAndRenderVehicles() {
 
         if (allVehicles.length === 0) {
             console.warn("API không có dữ liệu, sử dụng dữ liệu mẫu cứng (hardcodedVehicles) từ HTML.");
-            // Fallback to data embedded in HTML
             if (window.hardcodedVehicles && Array.isArray(window.hardcodedVehicles)) {
                 allVehicles = [...window.hardcodedVehicles];
             } else {
                 console.error("Không tìm thấy dữ liệu xe cứng trong window.hardcodedVehicles.");
-                allVehicles = []; // Ensure it's an empty array if nothing is found
+                allVehicles = []; 
             }
         }
     } catch (error) {
         console.error('Lỗi khi tải danh sách xe từ API:', error);
         showToast(`Không thể tải danh sách xe từ API: ${error.message}. Sử dụng dữ liệu mẫu từ HTML.`, 'error');
-        // Fallback to data embedded in HTML
         if (window.hardcodedVehicles && Array.isArray(window.hardcodedVehicles)) {
             allVehicles = [...window.hardcodedVehicles];
         } else {
             console.error("Không tìm thấy dữ liệu xe cứng trong window.hardcodedVehicles.");
-            allVehicles = []; // Ensure it's an empty array if nothing is found
+            allVehicles = []; 
         }
     } finally {
-        renderVehicles(allVehicles); // Render dữ liệu đã có (từ API hoặc mẫu)
+        renderVehicles(allVehicles); 
     }
 }
 
@@ -79,7 +75,7 @@ function renderVehicles(vehiclesToRender) {
         }
 
         const vehicleCard = document.createElement('div');
-        vehicleCard.className = 'product'; // Giữ class 'product' để tận dụng CSS hiện có
+        vehicleCard.className = 'product'; 
         vehicleCard.setAttribute('data-id', vehicle.id);
         vehicleCard.setAttribute('data-type', vehicle.type || 'N/A');
 
@@ -105,7 +101,6 @@ function setupSearchAndFilter() {
 
     if (typeFilter) {
         typeFilter.innerHTML = '<option value="">Tất cả loại xe</option>';
-        // Use window.hardcodedVehicles to populate filter options initially
         const vehicleTypes = [...new Set(window.hardcodedVehicles.map(v => v.type))].sort();
         vehicleTypes.forEach(type => {
             if (type) {
@@ -130,7 +125,7 @@ function filterAndRenderVehicles() {
     const searchTerm = searchInput ? searchInput.value.trim().toLowerCase() : '';
     const selectedType = typeFilter ? typeFilter.value : '';
 
-    let filteredVehicles = [...allVehicles]; // Use allVehicles which is populated from API or window.hardcodedVehicles
+    let filteredVehicles = [...allVehicles]; 
 
     if (searchTerm) {
         filteredVehicles = filteredVehicles.filter(vehicle =>
@@ -164,17 +159,12 @@ function setupVehicleEventListeners() {
             const vehicleId = targetButton.dataset.id;
             if (vehicleId) {
                 console.log('Đã nhấp nút chi tiết xe, ID xe:', vehicleId);
-
-                // THÊM KIỂM TRA ĐĂNG NHẬP Ở ĐÂY
-                // `isLoggedIn()` được import từ `utils.js`
                 if (!isLoggedIn()) { //
                     showToast('Vui lòng đăng nhập để đặt xe.', 'error'); //
-                    // Tùy chọn: Chuyển hướng đến trang tài khoản hoặc hiển thị modal đăng nhập
                     setTimeout(() => redirectToPage('account.html'), 1500); //
-                    return; // Ngăn chặn chuyển hướng đến checkout.html
+                    return; 
                 }
 
-                // CHUYỂN HƯỚNG ĐẾN CHECKOUT.HTML VỚI vehicleId TRONG URL
                 redirectToPage(`checkout.html?vehicleId=${vehicleId}`); //
             } else {
                 console.error('Không tìm thấy ID xe cho nút chi tiết.');
