@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Liên hệ Thuê Xe An Toàn để được hỗ trợ, tư vấn và đặt xe nhanh chóng.">
+    <meta name="keywords" content="Thuê Xe An Toàn, liên hệ, hỗ trợ, tư vấn, địa chỉ, điện thoại, email">
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+    <title>Thuê Xe An Toàn - Liên Hệ</title>
+    <link rel="stylesheet" href="css/contact.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="main-header">
+        <div class="header-container">
+            <h1 class="site-title">Thuê Xe An Toàn</h1>
+            <p class="slogan">Trải Nghiệm Tuyệt Vời Trên Mọi Nẻo Đường</p>
+        </div>
+    </header>
+
+    <nav>
+        <a href="index.html" class="nav-item"><i class="fas fa-home"></i> Trang Chủ</a>
+        <a href="vehicles.html" class="nav-item"><i class="fas fa-car"></i> Xe Cho Thuê</a>
+        <a href="blog.html" class="nav-item"><i class="fas fa-blog"></i> Blog Du Lịch</a>
+        <a href="account.html" class="nav-item"><i class="fas fa-user"></i> Tài Khoản</a>
+        <a href="contact.html" class="nav-item active"><i class="fas fa-address-book"></i> Liên Hệ</a>
+    </nav>
+
+    <div class="container">
+        <section class="contact-section">
+            <h2>Liên Hệ Với Chúng Tôi</h2>
+            <p class="section-description">Chúng tôi luôn sẵn lòng lắng nghe và hỗ trợ bạn. Vui lòng điền vào biểu mẫu dưới đây hoặc sử dụng thông tin liên hệ trực tiếp.</p>
+
+            <div class="contact-grid">
+                <div class="contact-info-card">
+                    <h3>Thông Tin Liên Hệ</h3>
+                    <div class="info-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <p>Địa chỉ: Hoà Hải, Ngũ Hành Sơn, Đà Nẵng, Việt Nam</p>
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-phone"></i>
+                        <p>Điện thoại: <a href="tel:+84901234567">0901 234 567</a></p>
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-envelope"></i>
+                        <div>
+                            <p>Email:</p>
+                            <p><a href="mailto:mypnt.24ns@vku.udn.vn">mypnt.24ns@vku.udn.vn</a></p>
+                            <p><a href="mailto:phuocnn.24ns@vku.udn.vn">phuocnn.24ns@vku.udn.vn</a></p>
+                            <p><a href="mailto:tupa.24ns@vku.udn.vn">tupa.24ns@vku.udn.vn</a></p>
+                            <p><a href="mailto:sondct.24ns@vku.udn.vn">sondct.24ns@vku.udn.vn</a></p>
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-clock"></i>
+                        <p>Giờ làm việc: Thứ Hai - Thứ Bảy, 8:00 - 18:00</p>
+                    </div>
+                    <div class="social-links-contact">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+
+                <div class="contact-form-card">
+                    <h3>Gửi Tin Nhắn Cho Chúng Tôi</h3>
+                    <form id="contact-form">
+                        <div class="form-group">
+                            <label for="name">Họ và Tên <span class="required">*</span></label>
+                            <input type="text" id="name" name="name" placeholder="Nhập họ và tên của bạn" required>
+                            <div id="name-error" class="error-message"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email <span class="required">*</span></label>
+                            <input type="email" id="email" name="email" placeholder="Nhập địa chỉ email của bạn" required>
+                            <div id="email-error" class="error-message"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Số Điện Thoại</label>
+                            <input type="tel" id="phone" name="phone" placeholder="Nhập số điện thoại (tùy chọn)">
+                            <div id="phone-error" class="error-message"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="subject">Chủ đề <span class="required">*</span></label>
+                            <input type="text" id="subject" name="subject" placeholder="Chủ đề tin nhắn của bạn" required>
+                            <div id="subject-error" class="error-message"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Nội dung tin nhắn <span class="required">*</span></label>
+                            <textarea id="message" name="message" rows="6" placeholder="Nhập nội dung tin nhắn của bạn" required></textarea>
+                            <div id="message-error" class="error-message"></div>
+                        </div>
+                        <button type="submit" class="btn"><i class="fas fa-paper-plane"></i> Gửi Tin Nhắn</button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="contact-map">
+                <h3>Vị Trí Của Chúng Tôi</h3>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3834.116527845347!2d108.22557497500587!3d16.059296539958046!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3142199b1efd630d%3A0xf673231df7879e8c!2zNTkgTmd1SBIwbmggU29uLCBBYmMgQ3AgQ2l0eSwgxqDg_vbiBO4bq1bmcsIFZp4buHdCBOYW0!5e0!3m2!1svi!2s!4v1700000000000!5m2!1svi!2s" width="100%" height="400" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <p>© 2025 Thuê Xe An Toàn. Tất cả các quyền được bảo lưu.</p>
+    </footer>
+
+    <div id="toast" class="toast" style="display: none;">
+        <span id="toast-message"></span>
+    </div>
+    <div id="loading" class="loading" style="display: none;">
+        <i class="fas fa-spinner fa-spin"></i> Đang xử lý...
+    </div>
+
+    <script type="module" src="javascript/common/utils.js"></script>
+    <script type="module" src="javascript/pages/contact.js"></script>
+</body>
+</html>

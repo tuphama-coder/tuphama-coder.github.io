@@ -1,0 +1,388 @@
+/*
+======================
+  VEHICLE RENTAL THEME
+  Index Styles
+======================
+*/
+
+/* Import biến màu và style chung từ style.css */
+@import url("style.css");
+
+/* Định nghĩa lại các biến màu cho trang index để đồng bộ với blog */
+:root {
+    --primary-color: #6C7EFF; /* Màu xanh tím */
+    --primary-color-rgb: 108, 126, 255;
+    --primary-dark: #4A5CDA; /* Màu xanh tím đậm hơn */
+    --primary-light: #A7B6FF; /* Màu xanh tím nhạt hơn */
+    --accent-color: #FF6B6B; /* Màu đỏ cam làm điểm nhấn */
+    --text-color: #333;
+    --light-gray: #eee; /* Màu nền chính cho body */
+    --dark-gray: #555;
+    --white: #ffffff;
+
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 16px;
+    --radius-full: 9999px;
+
+    --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.08);
+    --shadow-md: 0 6px 12px rgba(0, 0, 0, 0.12);
+    --shadow-lg: 0 10px 20px rgba(0, 0, 0, 0.18);
+
+    --spacing-xs: 4px;
+    --spacing-sm: 8px;
+    --spacing-md: 16px;
+    --spacing-lg: 24px;
+    --spacing-xl: 48px;
+
+    --font-heading: 'Playfair Display', serif;
+    --font-body: 'Poppins', sans-serif;
+
+    --transition: all 0.3s ease-in-out;
+}
+
+/* Áp dụng màu nền cho body của index.html */
+body {
+    background-color: var(--light-gray);
+    font-family: var(--font-body);
+    color: var(--text-color);
+    line-height: 1.6;
+}
+
+/* Styles cho Header và Navigation */
+.main-header {
+    background: linear-gradient(90deg, var(--primary-dark), var(--primary-color));
+    color: var(--white);
+    padding: var(--spacing-md) 0;
+    text-align: center;
+    box-shadow: var(--shadow-md);
+    position: relative;
+    overflow: hidden;
+}
+
+.header-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+}
+
+.site-title {
+    font-family: var(--font-heading);
+    font-size: 2.5em;
+    margin: 0;
+    line-height: 1;
+    position: relative;
+}
+
+.header-accent {
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 4px;
+    background-color: var(--accent-color);
+    border-radius: var(--radius-sm);
+    box-shadow: var(--shadow-sm);
+}
+
+nav {
+    background-color: var(--primary-color);
+    padding: var(--spacing-sm) 0;
+    box-shadow: var(--shadow-md);
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.nav-item {
+    color: var(--white);
+    text-decoration: none;
+    padding: var(--spacing-sm) var(--spacing-md);
+    font-weight: 600;
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+}
+
+.nav-item:hover, .nav-item.active {
+    background-color: var(--primary-dark);
+    border-radius: var(--radius-sm);
+}
+
+.nav-item i {
+    font-size: 1.1em;
+}
+
+/* Responsive cho Nav (chỉ trong index.css) */
+@media (max-width: 768px) {
+    .main-header {
+        padding: var(--spacing-sm) 0;
+    }
+    .site-title {
+        font-size: 2em;
+    }
+    nav {
+        flex-direction: column;
+        padding: var(--spacing-sm) 0;
+    }
+    .nav-item {
+        width: 100%;
+        padding: var(--spacing-sm) var(--spacing-md);
+        justify-content: center;
+    }
+}
+
+/* Banner */
+.banner {
+    position: relative;
+    height: 85vh;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+/* New styles for the video background */
+.banner-video { /* Changed from .banner-img to .banner-video */
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensures the video covers the entire container */
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+}
+
+.banner-content {
+    text-align: center;
+    color: var(--white);
+    background-color: rgba(0, 0, 0, 0.3);
+    padding: var(--spacing-lg);
+    border-radius: var(--radius-md);
+    max-width: 800px;
+    margin: 0 var(--spacing-md);
+    box-shadow: var(--shadow-lg);
+    z-index: 1; /* Ensure content is above the video */
+}
+
+.banner-content h2 {
+    font-family: var(--font-heading);
+    font-size: 3.5em;
+    margin-bottom: var(--spacing-sm);
+    color: var(--white);
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.banner-content p {
+    font-size: 1.3em;
+    margin-bottom: var(--spacing-lg);
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
+}
+
+.banner .btn {
+    font-size: 1.1em;
+    padding: var(--spacing-sm) var(--spacing-lg);
+}
+
+/* Sections chung */
+.container {
+    max-width: 1200px;
+    margin: var(--spacing-xl) auto;
+    padding: 0 var(--spacing-md);
+}
+
+section {
+    background-color: var(--white);
+    padding: var(--spacing-xl);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+    margin-bottom: var(--spacing-xl);
+    animation: fadeIn 0.6s ease forwards;
+}
+
+h2 {
+    font-family: var(--font-heading);
+    font-size: 32px;
+    color: var(--primary-dark);
+    text-align: center;
+    margin-bottom: var(--spacing-lg);
+    position: relative;
+    padding-bottom: var(--spacing-sm);
+}
+
+h2::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 4px;
+    background-color: var(--accent-color);
+    border-radius: var(--radius-sm);
+}
+
+/* Product Grid */
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--spacing-xl);
+    margin-top: var(--spacing-lg);
+}
+
+.product {
+    background-color: var(--white);
+    border: 1px solid var(--light-gray);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-sm);
+    padding: var(--spacing-md);
+    text-align: center;
+    transition: var(--transition);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.product:hover {
+    box-shadow: var(--shadow-md);
+    transform: translateY(-5px);
+}
+
+.product img {
+    max-width: 100%;
+    border-radius: var(--radius-sm);
+    margin-bottom: var(--spacing-md);
+}
+
+.product h3 {
+    font-family: var(--font-heading);
+    color: var(--primary-color);
+    margin-top: 0;
+    font-size: 22px;
+    margin-bottom: var(--spacing-sm);
+}
+
+.product p {
+    color: var(--dark-gray);
+    font-size: 0.95em;
+    flex-grow: 1;
+    margin-bottom: var(--spacing-md);
+}
+
+.product .price {
+    font-size: 1.3em;
+    font-weight: 700;
+    color: var(--accent-color);
+    margin-bottom: var(--spacing-md);
+    display: block;
+}
+
+.product .btn {
+    margin-top: auto;
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* About and Promo Sections */
+.about, .promo {
+    text-align: center;
+    padding: var(--spacing-xl);
+}
+
+.about .btn, .promo .btn {
+    margin-top: var(--spacing-lg);
+}
+
+.about-content, .promo-content {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.about p, .promo p {
+    font-size: 1.1em;
+    color: var(--dark-gray);
+    margin-bottom: var(--spacing-md);
+}
+
+
+/* Responsive Adjustments */
+@media (max-width: 992px) {
+    .banner-content h2 {
+        font-size: 3em;
+    }
+    .product-grid {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    }
+    h2 {
+        font-size: 28px;
+    }
+}
+
+@media (max-width: 768px) {
+    .banner {
+        height: 70vh;
+    }
+    .banner-content h2 {
+        font-size: 2.5em;
+    }
+    .banner-content {
+        padding: var(--spacing-md);
+    }
+    .product-grid {
+        gap: var(--spacing-md);
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    }
+    .product h3 {
+        font-size: 18px;
+    }
+    .price {
+        font-size: 1.1em;
+    }
+    .btn {
+        padding: var(--spacing-sm) var(--spacing-lg);
+        font-size: 0.9em;
+    }
+    section {
+        padding: var(--spacing-lg);
+        margin-bottom: var(--spacing-lg);
+    }
+    h2 {
+        font-size: 24px;
+        margin-bottom: var(--spacing-md);
+    }
+}
+
+@media (max-width: 576px) {
+    .banner-content h2 {
+        font-size: 2em;
+    }
+    .banner-content p {
+        font-size: 1em;
+    }
+    .product-grid {
+        grid-template-columns: 1fr;
+    }
+    .product {
+        padding: var(--spacing-sm);
+    }
+    .product img {
+        height: 180px;
+        object-fit: cover;
+    }
+    section {
+        padding: var(--spacing-md);
+    }
+    h2 {
+        font-size: 22px;
+    }
+}

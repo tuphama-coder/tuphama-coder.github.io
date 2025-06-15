@@ -1,0 +1,414 @@
+/*
+======================
+  VEHICLE RENTAL THEME
+  Vehicles Listing Styles
+======================
+*/
+
+/* Import biến màu và style chung từ style.css */
+@import url("style.css");
+
+/* Định nghĩa lại các biến nếu cần, hoặc đảm bảo style.css đã có */
+:root {
+    --primary-color: #6C7EFF;
+    --primary-dark: #4A5CDA;
+    --primary-light: #A7B6FF;
+    --secondary-color: #F8F8F8; /* Màu nền header / nút khác */
+    --accent-color: #FF6B6B;
+    --text-color: #333;
+    --light-gray: #eee;
+    --dark-gray: #555;
+    --white: #ffffff;
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-full: 9999px;
+    --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.08);
+    --shadow-md: 0 6px 12px rgba(0, 0, 0, 0.12);
+    --shadow-lg: 0 10px 20px rgba(0, 0, 0, 0.18);
+    --spacing-xs: 4px;
+    --spacing-sm: 8px;
+    --spacing-md: 16px;
+    --spacing-lg: 24px;
+    --spacing-xl: 32px;
+    --font-base: 'Poppins', sans-serif;
+    --font-accent: 'Playfair Display', serif;
+    --transition: all 0.3s ease-in-out;
+}
+
+
+/* Override header và nav cho trang này */
+header {
+   background-color: var(--secondary-color);
+   padding: var(--spacing-md) var(--spacing-md);
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   box-shadow: var(--shadow-sm); /* Thêm đổ bóng nhẹ */
+}
+
+header .logo h1 {
+   color: var(--primary-dark);
+   font-family: var(--font-accent); /* Giữ font accent cho tiêu đề logo */
+   font-size: 36px;
+   margin: 0;
+}
+header .logo .slogan {
+    color: var(--dark-gray);
+    font-size: 14px;
+    margin-top: var(--spacing-xs);
+}
+
+.header-right-items .btn {
+    background-color: var(--primary-color);
+    color: var(--white);
+    padding: var(--spacing-sm) var(--spacing-md);
+    border-radius: var(--radius-sm);
+    text-decoration: none;
+    font-weight: 600;
+    transition: var(--transition);
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+}
+.header-right-items .btn:hover {
+    background-color: var(--primary-dark);
+    box-shadow: var(--shadow-sm);
+}
+
+/* Navigation - Đảm bảo đồng bộ với blog.css nếu muốn */
+nav {
+    background-color: var(--white);
+    box-shadow: var(--shadow-sm);
+    padding: var(--spacing-sm) 0;
+    text-align: center;
+    border-bottom: 1px solid var(--light-gray);
+    margin-bottom: var(--spacing-lg);
+}
+
+nav a {
+    display: inline-block;
+    padding: var(--spacing-sm) var(--spacing-md);
+    color: var(--dark-gray);
+    text-decoration: none;
+    font-weight: 600;
+    transition: var(--transition);
+    position: relative;
+    font-size: 1.05em;
+    border-radius: var(--radius-full);
+    margin: 0 var(--spacing-sm);
+}
+
+nav a:hover {
+    color: var(--primary-color);
+    background-color: rgba(var(--primary-color-rgb), 0.1);
+}
+
+nav a.active {
+    color: var(--white);
+    background: linear-gradient(45deg, var(--primary-dark), var(--primary-color));
+    box-shadow: var(--shadow-md);
+    transform: translateY(-2px);
+}
+
+nav a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 3px;
+    background-color: var(--accent-color);
+    transition: width 0.3s ease-in-out;
+}
+
+nav a:hover::after, nav a.active::after {
+    width: calc(100% - 2 * var(--spacing-sm));
+}
+
+
+.container {
+    max-width: 1200px;
+    margin: var(--spacing-md) auto;
+    padding: 0 var(--spacing-md);
+}
+
+h2 {
+    font-family: var(--font-accent);
+    color: var(--primary-dark);
+    margin-bottom: var(--spacing-lg);
+    position: relative;
+    display: inline-block;
+    padding-bottom: var(--spacing-sm);
+    font-size: 32px;
+    text-align: center;
+    width: 100%;
+}
+
+h2::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 4px;
+    background-color: var(--primary-color);
+    border-radius: var(--radius-full);
+}
+
+
+/* Filter Controls */
+.filter-controls {
+    display: flex;
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-xl); /* Tăng khoảng cách dưới filter */
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    padding: var(--spacing-sm) 0; /* Thêm padding nhẹ */
+    background-color: var(--white); /* Nền cho bộ lọc */
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-sm);
+}
+
+.filter-controls input[type="text"],
+.filter-controls select { /* loại bỏ input date nếu không dùng */
+    padding: var(--spacing-sm) var(--spacing-md); /* Thêm padding ngang */
+    border: 1px solid var(--light-gray);
+    border-radius: var(--radius-sm);
+    font-size: 1em;
+    flex-grow: 1;
+    min-width: 150px;
+    max-width: 350px; /* Tăng max-width cho input text */
+    transition: border-color var(--transition), box-shadow var(--transition);
+}
+.filter-controls input[type="text"]:focus,
+.filter-controls select:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 5px rgba(var(--primary-color-rgb), 0.3); /* Sử dụng RGB cho đổ bóng */
+    outline: none;
+}
+
+.filter-controls select {
+    cursor: pointer;
+    flex-grow: 0;
+    width: auto;
+}
+
+.filter-controls button {
+    padding: var(--spacing-sm) var(--spacing-md);
+    background-color: var(--primary-color);
+    color: var(--white);
+    border: none;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    font-size: 1em;
+    transition: var(--transition);
+    box-shadow: var(--shadow-sm); /* Thêm đổ bóng */
+}
+.filter-controls button:hover {
+    background-color: var(--primary-dark);
+    box-shadow: var(--shadow-md);
+}
+
+
+/* Vehicle Grid (Thay thế Product Grid) */
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--spacing-lg);
+    margin-top: var(--spacing-md);
+}
+
+.product {
+    background: var(--white);
+    padding: var(--spacing-md);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-md);
+    transition: var(--transition);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    border-top: 5px solid var(--primary-light);
+}
+
+.product img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    border-radius: var(--radius-sm);
+    margin-bottom: var(--spacing-sm);
+    transition: transform 0.6s ease;
+}
+
+.product:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-lg);
+    border-color: var(--primary-dark); /* Đổi màu viền khi hover */
+}
+
+.product:hover img {
+    transform: scale(1.03);
+}
+
+.product h3 {
+    margin: 0 0 var(--spacing-xs);
+    color: var(--primary-dark);
+    font-size: 20px; /* Kích thước tiêu đề xe lớn hơn */
+    font-family: var(--font-accent);
+    line-height: 1.3;
+}
+
+.product p {
+    font-size: 14px;
+    color: var(--dark-gray);
+    margin: 0 0 var(--spacing-xs);
+    line-height: 1.4;
+}
+
+.price {
+    color: var(--accent-color); /* Sử dụng màu accent cho giá để nổi bật hơn */
+    font-weight: 700;
+    margin: var(--spacing-sm) 0 var(--spacing-md);
+    font-size: 1.3em; /* Kích thước giá lớn hơn */
+    margin-top: auto;
+}
+
+.product .btn {
+    display: block;
+    width: 100%;
+    padding: var(--spacing-sm) var(--spacing-md);
+    font-size: 1em;
+    text-align: center;
+    background: var(--primary-color); /* Nền nút đặt xe đồng bộ với primary */
+    color: var(--white);
+    border: none; /* Bỏ border */
+    border-radius: var(--radius-sm);
+    box-shadow: var(--shadow-sm); /* Thêm đổ bóng cho nút */
+    font-weight: 600;
+    text-decoration: none; /* Đảm bảo không có gạch chân */
+}
+
+.product .btn:hover {
+    background: var(--primary-dark);
+    color: var(--white);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+/* Toast vẫn giữ */
+#toast {
+    position: fixed;
+    bottom: var(--spacing-lg);
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(51, 51, 51, 0.9);
+    color: var(--white);
+    padding: var(--spacing-md) var(--spacing-xl);
+    border-radius: var(--radius-md);
+    z-index: 1000;
+    font-size: 1em;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.5s ease-out, visibility 0.5s ease-out;
+    box-shadow: var(--shadow-lg);
+}
+
+#toast.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+#toast.error {
+    background-color: rgba(var(--accent-color-rgb), 0.9); /* Màu đỏ cho lỗi */
+}
+
+/* Footer vẫn giữ */
+footer {
+    background-color: var(--dark-gray);
+    color: var(--white);
+    text-align: center;
+    padding: var(--spacing-md) 0;
+    font-size: 0.9em;
+    margin-top: var(--spacing-xl);
+}
+
+
+/* Responsive */
+@media (max-width: 992px) {
+    .product-grid {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: var(--spacing-md);
+    }
+    h2 {
+        font-size: 28px;
+    }
+}
+
+@media (max-width: 768px) {
+    .container {
+         padding: 0 var(--spacing-sm);
+    }
+     .filter-controls {
+         gap: var(--spacing-sm);
+         padding: var(--spacing-sm); /* Thêm padding cho mobile */
+     }
+    .filter-controls input[type="text"],
+    .filter-controls select {
+         min-width: unset; /* Bỏ min-width để giãn nở tốt hơn */
+         padding: 8px;
+         font-size: 0.9em;
+    }
+
+    .product-grid {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: var(--spacing-md);
+    }
+     .product img {
+         height: 180px;
+     }
+    .product h3 {
+        font-size: 17px;
+    }
+    .price {
+        font-size: 1.1em;
+    }
+     h2 {
+        font-size: 24px;
+    }
+    header .logo h1 { font-size: 30px; }
+    header .logo .slogan { display: none; } /* Ẩn slogan trên mobile nhỏ */
+    .header-right-items .btn { padding: var(--spacing-sm); font-size: 0.9em; }
+}
+
+@media (max-width: 576px) {
+     .filter-controls {
+         flex-direction: column;
+         align-items: stretch;
+     }
+     .filter-controls input[type="text"],
+     .filter-controls select {
+         width: 100%;
+         max-width: 100%;
+     }
+
+    .product-grid {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-md);
+    }
+    .product {
+        padding: var(--spacing-md);
+    }
+    .product img {
+        height: 200px;
+    }
+    .product h3 {
+        font-size: 18px;
+    }
+     .product .btn {
+         padding: var(--spacing-sm);
+     }
+    nav a { padding: var(--spacing-xs) var(--spacing-sm); font-size: 0.9em; }
+}

@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Quản lý tài khoản tại Thuê Xe An Toàn">
+    <meta name="keywords" content="Thuê Xe An Toàn, tài khoản, đăng nhập, đăng ký, đơn hàng, lịch sử thuê xe">
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+    <title>Thuê Xe An Toàn - Tài Khoản</title>
+    <link rel="stylesheet" href="css/account.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="main-header">
+        <div class="header-container">
+            <h1 class="site-title">Thuê Xe An Toàn</h1>
+            <div class="header-accent"></div>
+        </div>
+    </header>
+    <nav class="main-nav">
+       <a href="index.html" class="nav-item"><i class="fas fa-home"></i> Trang Chủ</a>
+       <a href="vehicles.html" class="nav-item"><i class="fas fa-car"></i> Xe Cho Thuê</a>
+       <a href="blog.html" class="nav-item"><i class="fas fa-blog"></i> Blog Du Lịch</a>
+       <a href="account.html" class="nav-item active"><i class="fas fa-user"></i> Tài Khoản</a>
+       <a href="contact.html" class="nav-item"><i class="fas fa-address-book"></i> Liên Hệ</a>
+   </nav>
+
+    <div class="container">
+        <section class="auth-section" id="auth-section">
+            <div class="auth-toggle">
+                <button class="toggle-btn active" id="login-btn">Đăng Nhập</button>
+                <button class="toggle-btn" id="register-btn">Đăng Ký</button>
+            </div>
+
+            <form id="login-form" class="auth-form animate-form">
+                <h2>Đăng Nhập Tài Khoản</h2>
+                <div id="login-error" class="error-message" style="display: none;"></div>
+                <div class="form-group">
+                    <label for="login-email">Email <span class="required">*</span></label>
+                    <input type="email" id="login-email" name="login-email" required placeholder="Nhập email của bạn">
+                </div>
+                <div class="form-group">
+                    <label for="login-password">Mật Khẩu <span class="required">*</span></label>
+                    <input type="password" id="login-password" name="login-password" required placeholder="Nhập mật khẩu của bạn">
+                </div>
+                <div class="form-group">
+                    <a href="#" id="forgot-password-link">Quên mật khẩu?</a>
+                </div>
+                <button type="submit" class="btn">Đăng Nhập</button>
+               <div class="social-login">
+                    <p style="margin-top: 15px; color: var(--dark-gray);">Hoặc đăng nhập bằng:</p>
+                    <div style="display: flex; justify-content: center; gap: var(--spacing-sm); margin-top: var(--spacing-sm);">
+                        <button type="button" class="social-btn" data-provider="google"><i class="fab fa-google"></i> Google</button>
+                        <button type="button" class="social-btn" data-provider="facebook"><i class="fab fa-facebook"></i> Facebook</button>
+                    </div>
+                </div>
+            </form>
+
+            <form id="register-form" class="auth-form animate-form" style="display: none;">
+                <h2>Đăng Ký Tài Khoản Mới</h2>
+                <div id="register-error" class="error-message" style="display: none;"></div>
+                <div class="form-group">
+                    <label for="register-name">Họ và Tên <span class="required">*</span></label>
+                    <input type="text" id="register-name" name="register-name" required placeholder="Nhập họ và tên">
+                </div>
+                <div class="form-group">
+                    <label for="register-email">Email <span class="required">*</span></label>
+                    <input type="email" id="register-email" name="register-email" required placeholder="Nhập email của bạn">
+                </div>
+                <div class="form-group">
+                    <label for="register-phone">Số Điện Thoại <span class="required">*</span></label>
+                    <input type="tel" id="register-phone" name="register-phone" required placeholder="Nhập số điện thoại">
+                </div>
+                <div class="form-group">
+                    <label for="register-password">Mật Khẩu <span class="required">*</span></label>
+                    <input type="password" id="register-password" name="register-password" required placeholder="Nhập mật khẩu">
+                    <p class="password-hint" style="font-size: 0.9em; color: var(--dark-gray); margin-top: 5px;">Mật khẩu phải có ít nhất 8 ký tự, bao gồm chữ hoa, chữ thường, số và ký tự đặc biệt.</p>
+                </div>
+                <button type="submit" class="btn">Đăng Ký</button>
+            </form>
+
+            <form id="forgot-password-form" class="auth-form animate-form" style="display: none;">
+                <h2>Khôi Phục Mật Khẩu</h2>
+                <div id="forgot-error" class="error-message" style="display: none;"></div>
+                <div class="form-group">
+                    <label for="forgot-email">Email <span class="required">*</span></label>
+                    <input type="email" id="forgot-email" name="forgot-email" required placeholder="Nhập email của bạn">
+                </div>
+                <button type="submit" class="btn">Gửi OTP</button>
+                <button type="button" class="btn-back" id="back-to-login" style="margin-top: 10px;">Quay Lại</button>
+            </form>
+
+            <form id="reset-password-form" class="auth-form animate-form" style="display: none;">
+                <h2>Đặt Lại Mật Khẩu</h2>
+                <div id="reset-error" class="error-message" style="display: none;"></div>
+                <div class="form-group">
+                    <label for="reset-password">Mật Khẩu Mới <span class="required">*</span></label>
+                    <input type="password" id="reset-password" name="reset-password" required placeholder="Nhập mật khẩu mới">
+                </div>
+                <div class="form-group">
+                    <label for="reset-confirm-password">Xác Nhận Mật Khẩu <span class="required">*</span></label>
+                    <input type="password" id="reset-confirm-password" name="reset-confirm-password" required placeholder="Xác nhận mật khẩu">
+                </div>
+                <button type="submit" class="btn">Cập Nhật Mật Khẩu</button>
+                <button type="button" class="btn-back" id="back-to-login-from-reset" style="margin-top: 10px;">Quay Lại</button>
+            </form>
+
+            <div id="otp-modal" class="modal" style="display: none;">
+                <div class="modal-content">
+                    <h3><i class="fas fa-lock"></i> Xác Nhận OTP</h3>
+                    <p>Nhập mã OTP được gửi đến email của bạn. Mã có hiệu lực trong <span id="otp-timer">60</span> giây.</p>
+                    <div id="otp-error" class="error-message" style="display: none;"></div>
+                    <div class="form-group">
+                        <input type="text" id="otp-input" placeholder="Nhập mã OTP (VD: 123456)" required maxlength="6" aria-required="true">
+                    </div>
+                    <div class="modal-actions">
+                        <button id="cancel-otp" class="btn-back"><i class="fas fa-times"></i> Hủy</button>
+                        <button id="confirm-otp" class="btn"><i class="fas fa-check"></i> Xác Nhận</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="account-section" id="account-section" style="display: none;">
+            <h2>Quản Lý Đặt Xe & Tài Khoản</h2>
+            <div class="account-tabs">
+                <button class="tab-btn active" data-tab="profile">Hồ Sơ</button>
+                <button class="tab-btn" data-tab="orders">Lịch Sử Đặt Xe</button>
+                <button class="tab-btn" data-tab="addresses">Địa Chỉ</button>
+                <button class="tab-btn" data-tab="reviews">Đánh Giá</button>
+                <button class="tab-btn" data-tab="membership-benefits">Ưu Đãi Thành Viên</button>
+                <button class="tab-btn" data-tab="membership-levels">Cấp Độ Thành Viên</button>
+                <button class="tab-btn" data-tab="faq">Câu Hỏi Thường Gặp</button>
+                <button class="tab-btn" id="logout-btn" data-tab="logout">Đăng Xuất</button>
+            </div>
+
+           <div class="tab-content" id="profile">
+                <h3>Hồ Sơ Cá Nhân</h3>
+                <form id="profile-form">
+                    <div class="form-group">
+                        <label for="profile-name">Họ và Tên</label>
+                        <input type="text" id="profile-name" name="profile-name" placeholder="Nhập họ tên">
+                    </div>
+                    <div class="form-group">
+                        <label for="profile-email">Email</label>
+                        <input type="email" id="profile-email" name="profile-email" placeholder="Nhập email" disabled>
+                    </div>
+                    <div class="form-group">
+                        <label for="profile-phone">Số Điện Thoại</label>
+                        <input type="tel" id="profile-phone" name="profile-phone" placeholder="Nhập số điện thoại">
+                    </div>
+                    <div class="form-group">
+                        <label for="profile-address">Địa Chỉ Liên Hệ</label>
+                        <input type="text" id="profile-address" name="profile-address" placeholder="Nhập địa chỉ liên hệ">
+                    </div>
+                    <div class="form-group">
+                        <label><input type="checkbox" id="profile-notifications" name="profile-notifications"> Nhận thông báo qua email</label>
+                    </div>
+                    <button type="submit" class="btn">Cập Nhật Hồ Sơ</button>
+                </form>
+
+                <h3>Đổi Mật Khẩu</h3>
+                <form id="change-password-form">
+                     <div class="form-group">
+                        <label for="current-password">Mật Khẩu Hiện Tại <span class="required">*</span></label>
+                        <input type="password" id="current-password" name="current-password" required placeholder="Nhập mật khẩu hiện tại">
+                    </div>
+                    <div class="form-group">
+                        <label for="new-password">Mật Khẩu Mới <span class="required">*</span></label>
+                        <input type="password" id="new-password" name="new-password" required placeholder="Nhập mật khẩu mới">
+                    </div>
+                    <div class="form-group">
+                        <label for="confirm-new-password">Xác Nhận Mật Khẩu <span class="required">*</span></label>
+                        <input type="password" id="confirm-new-password" name="confirm-new-password" required placeholder="Xác nhận mật khẩu">
+                    </div>
+                    <button type="submit" class="btn">Đổi Mật Khẩu</button>
+                </form>
+
+                <h3>Mã Giảm Giá</h3>
+                <form id="coupon-form">
+                    <div class="form-group">
+                        <label for="coupon-code">Nhập Mã Giảm Giá</label>
+                        <input type="text" id="coupon-code" name="coupon-code" placeholder="Nhập mã giảm giá (VD: THUEXE20)">
+                    </div>
+                    <button type="submit" class="btn">Áp Dụng</button>
+                </form>
+                <div id="coupon-list" style="margin-top: 20px;"></div>
+
+                <h3>Xóa Tài Khoản</h3>
+                 <button class="btn-delete-account" id="delete-account-btn"><i class="fas fa-exclamation-triangle"></i> Xóa Tài Khoản Vĩnh Viễn</button>
+            </div>
+
+            <div class="tab-content" id="orders" style="display: none;">
+                <h3>Lịch Sử Đặt Xe</h3>
+                <div id="order-list">
+                    <p class="no-orders">Bạn chưa có lượt đặt xe nào.</p>
+                </div>
+            </div>
+
+            <div class="tab-content" id="addresses" style="display: none;">
+                <h3>Địa Chỉ Đã Lưu</h3>
+                <form id="address-form">
+                    <div class="form-group">
+                        <label for="address-name">Tên Địa Chỉ (VD: Nhà riêng, Công ty)</label>
+                        <input type="text" id="address-name" name="address-name" placeholder="Nhập tên địa chỉ (ví dụ: Nhà riêng)">
+                    </div>
+                    <div class="form-group">
+                        <label for="address-details">Địa Chỉ Chi Tiết</label>
+                        <input type="text" id="address-details" name="address-details" placeholder="Nhập địa chỉ chi tiết (Số nhà, đường, phường, quận, thành phố)">
+                    </div>
+                    <button type="submit" class="btn">Thêm Địa Chỉ</button>
+                </form>
+                <div id="address-list" style="margin-top: 20px;"></div>
+            </div>
+
+            <div class="tab-content" id="reviews" style="display: none;">
+                <h3>Viết Đánh Giá Mới</h3>
+                <form id="add-review-form">
+                    <div class="form-group">
+                       <label for="review-vehicle-select">Xe bạn muốn đánh giá <span class="required">*</span></label>
+                       <select id="review-vehicle-select" name="review-vehicle-select" required>
+                          <option value="">-- Chọn xe --</option>
+                         </select>
+                 </div>
+                    <div class="form-group">
+                       <label>Đánh giá sao <span class="required">*</span></label>
+                       <div class="rating">
+                         <input type="radio" name="rating" id="star5" value="5" required><label for="star5"><i class="fas fa-star"></i></label>
+                         <input type="radio" name="rating" id="star4" value="4"><label for="star4"><i class="fas fa-star"></i></label>
+                         <input type="radio" name="rating" id="star3" value="3"><label for="star3"><i class="fas fa-star"></i></label>
+                         <input type="radio" name="rating" id="star2" value="2"><label for="star2"><i class="fas fa-star"></i></label>
+                         <input type="radio" name="rating" id="star1" value="1"><label for="star1"><i class="fas fa-star"></i></label>
+    </div>
+</div>
+                    </div>
+                    <div class="form-group">
+                        <label for="review-comment">Nhận xét của bạn <span class="required">*</span></label>
+                        <textarea id="review-comment" name="review-comment" rows="4" required placeholder="Chia sẻ cảm nhận của bạn về chiếc xe và dịch vụ..."></textarea>
+                    </div>
+                    <button type="submit" class="btn">Gửi Đánh Giá</button>
+                </form>
+
+                <h3>Đánh Giá Của Bạn</h3>
+                 <div id="review-list">
+                     <p class="no-reviews">Bạn chưa có đánh giá nào.</p>
+                 </div>
+            </div>
+
+            <div class="tab-content" id="membership-benefits" style="display: none;">
+                <h3>Ưu Đãi Thành Viên</h3>
+                <div class="benefits-list">
+                    <div class="benefit-item">
+                        <i class="fas fa-percent"></i>
+                        <h4>Giảm Giá Đặt Xe</h4>
+                        <p>Nhận ưu đãi giảm giá đặc biệt cho các lần thuê xe.</p>
+                    </div>
+                    <div class="benefit-item">
+                        <i class="fas fa-gift"></i>
+                        <h4>Ưu Đãi Đặc Biệt</h4>
+                        <p>Nhận quà tặng hoặc voucher giảm giá vào dịp sinh nhật, lễ Tết.</p>
+                    </div>
+                    <div class="benefit-item">
+                        <i class="fas fa-star"></i>
+                        <h4>Ưu Tiên Phục Vụ</h4>
+                        <p>Được ưu tiên trong quá trình nhận/trả xe và hỗ trợ khách hàng.</p>
+                    </div>
+                    <div class="benefit-item">
+                        <i class="fas fa-car-side"></i>
+                        <h4>Nâng Cấp Xe</h4>
+                        <p>Cơ hội được nâng cấp lên dòng xe tốt hơn (tùy vào tình trạng sẵn có).</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-content" id="membership-levels" style="display: none;">
+                <h3>Cấp Độ Thành Viên</h3>
+                 <div id="current-level">
+                    <h4>Cấp độ hiện tại: <span id="level-name">[Tên cấp độ]</span></h4>
+                    <p>Tổng chi tiêu: <span id="total-spent">[Số tiền]</span> VNĐ</p>
+                    <div class="progress-bar">
+                        <div id="progress" class="progress" style="width: [Phần trăm]%;"></div>
+                    </div>
+                    <p id="next-level">[Thông báo về cấp độ tiếp theo]</p>
+                </div>
+                <div class="levels-list">
+                    <div class="level-item">
+                        <h4>Bạc (Silver)</h4>
+                        <p>Điều kiện: Tổng chi tiêu từ 0 VNĐ</p>
+                        <p>Quyền lợi: Giảm giá 3%, ưu đãi sinh nhật</p>
+                    </div>
+                    <div class="level-item">
+                        <h4>Vàng (Gold)</h4>
+                        <p>Điều kiện: Tổng chi tiêu từ 10.000.000 VNĐ</p>
+                        <p>Quyền lợi: Giảm giá 7%, ưu tiên nhận/trả xe, voucher dịch vụ</p>
+                    </div>
+                    <div class="level-item">
+                        <h4>Bạch Kim (Platinum)</h4>
+                        <p>Điều kiện: Tổng chi tiêu từ 30.000.000 VNĐ trở lên</p>
+                        <p>Quyền lợi: Giảm giá 10%, nâng cấp xe miễn phí (tùy tình trạng), hỗ trợ 24/7</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-content" id="faq" style="display: none;">
+                <h3>Câu Hỏi Thường Gặp Khi Thuê Xe</h3>
+                <div class="faq-list">
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            Làm thế nào để đặt xe?
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer" style="display: none;">
+                            Bạn có thể chọn xe trên trang "Xe Cho Thuê", chọn ngày giờ thuê, điền thông tin cá nhân và xác nhận đặt xe.
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            Tôi cần giấy tờ gì khi thuê xe?
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer" style="display: none;">
+                            Thông thường bạn cần Chứng minh nhân dân/Căn cước công dân và Giấy phép lái xe (hợp lệ với loại xe thuê). Một số trường hợp có thể yêu cầu thêm Passport hoặc giấy tờ khác.
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            Làm thế nào để kiểm tra tính sẵn có của xe?
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer" style="display: none;">
+                            Trên trang "Xe Cho Thuê", bạn có thể nhập ngày bắt đầu và kết thúc thuê để xem các xe còn trống trong khoảng thời gian đó.
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            Tôi có thể hủy đặt xe không?
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer" style="display: none;">
+                            Bạn có thể hủy đặt xe trong tab "Lịch Sử Đặt Xe" nếu trạng thái đặt xe cho phép (ví dụ: đang chờ xác nhận, đã xác nhận). Vui lòng đọc kỹ chính sách hủy đặt xe của chúng tôi.
+                        </div>
+                    </div>
+                     <div class="faq-item">
+                        <div class="faq-question">
+                            Giá thuê xe đã bao gồm những gì?
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer" style="display: none;">
+                            Giá thuê xe thường bao gồm tiền thuê xe cơ bản theo thời gian. Nó không bao gồm xăng xe, phí cầu đường, phí giữ xe, hoặc các chi phí phát sinh do vi phạm luật giao thông. Bảo hiểm cơ bản có thể đã bao gồm, nhưng bảo hiểm thân vỏ (không bắt buộc) sẽ có phí riêng. Vui lòng kiểm tra chi tiết khi đặt xe.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <p>© 2025 Thuê Xe An Toàn. Tất cả các quyền được bảo lưu.</p>
+    </footer>
+
+    <div id="toast" class="toast" style="display: none;">
+        <span id="toast-message"></span>
+    </div>
+
+    <div id="loading" class="loading" style="display: none;">
+        <i class="fas fa-spinner fa-spin"></i> Đang xử lý...
+    </div>
+
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v22.0&appId=YOUR_FACEBOOK_APP_ID"></script>
+    <script type="module" src="javascript/common/utils.js"></script>
+    <script type="module" src="javascript/pages/account.js"></script>
+</body>
+</html>

@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Xác nhận và thanh toán thuê xe tại Thuê Xe An Toàn">
+    <meta name="keywords" content="Thuê Xe An Toàn, thanh toán, đặt xe, thuê xe, MoMo, chuyển khoản">
+    <meta name="robots" content="index, follow">
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+    <title>Thuê Xe An Toàn - Xác Nhận & Thanh Toán</title>
+    <link rel="stylesheet" href="css/checkout.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cleave.js/1.6.0/cleave.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <h1>Thuê Xe An Toàn</h1>
+            <p class="slogan">Trải Nghiệm Tuyệt Vời Trên Mọi Nẻo Đường</p>
+        </div>
+    </header>
+
+    <nav>
+         <a href="index.html"><i class="fas fa-home"></i> Trang Chủ</a>
+        <a href="vehicles.html"><i class="fas fa-car"></i> Xe Cho Thuê</a>
+        <a href="blog.html"><i class="fas fa-blog"></i> Blog Du Lịch</a>
+        <a href="account.html"><i class="fas fa-user"></i> Tài Khoản</a>
+        <a href="contact.html" class="nav-item"><i class="fas fa-address-book"></i> Liên Hệ</a>
+    </nav>
+
+    <div class="container">
+        <div class="payment-page">
+            <div class="payment-content">
+                <div class="payment-info">
+                    <h2><i class="fas fa-info-circle"></i> Thông Tin Thuê Xe</h2>
+                    <form id="payment-form">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="start-date">Ngày Giờ Nhận Xe <span class="required">*</span></label>
+                                <input type="datetime-local" id="start-date" name="start-date" required aria-required="true">
+                            </div>
+                            <div class="form-group">
+                                <label for="end-date">Ngày Giờ Trả Xe <span class="required">*</span></label>
+                                <input type="datetime-local" id="end-date" name="end-date" required aria-required="true">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="customer-name">Họ và Tên Người Thuê <span class="required">*</span></label>
+                            <input type="text" id="customer-name" name="customer-name" required placeholder="Nhập họ tên người thuê" aria-required="true">
+                        </div>
+                        <div class="form-group">
+                            <label for="customer-phone">Số Điện Thoại Liên Hệ <span class="required">*</span></label>
+                            <input type="tel" id="customer-phone" name="customer-phone" required placeholder="Nhập số điện thoại liên hệ" aria-required="true">
+                        </div>
+                         <div class="form-group">
+                            <label for="customer-province">Tỉnh/Thành Phố <span class="required">*</span></label>
+                            <input type="text" id="customer-province" name="customer-province" required placeholder="Nhập tỉnh/thành phố" list="province-list" aria-required="true">
+                            <datalist id="province-list">
+                                <option value="Hà Nội">
+                                <option value="TP.HCM">
+                                <option value="Đà Nẵng">
+                                <option value="Cần Thơ">
+                                <option value="Khác">
+                            </datalist>
+                        </div>
+                        <div class="form-group">
+                            <label for="customer-address">Địa Chỉ Liên Hệ <span class="required">*</span></label>
+                            <input type="text" id="customer-address" name="customer-address" required placeholder="Nhập địa chỉ liên hệ chi tiết" aria-required="true">
+                        </div>
+                        <div class="form-group">
+                            <label for="pickup-location">Địa Điểm Nhận Xe <span class="required">*</span></label>
+                            <input type="text" id="pickup-location" name="pickup-location" required placeholder="Nhập địa điểm nhận xe">
+                        </div>
+                         <div class="form-group">
+                            <label for="return-location">Địa Điểm Trả Xe <span class="required">*</span></label>
+                            <input type="text" id="return-location" name="return-location" required placeholder="Nhập địa điểm trả xe">
+                        </div>
+                        <div class="form-group">
+                            <label for="customer-email">Email</label>
+                            <input type="email" id="customer-email" name="customer-email" placeholder="Nhập email" aria-describedby="email-desc">
+                            <small id="email-desc">Dùng để gửi xác nhận đặt xe.</small>
+                        </div>
+                        <div class="form-group">
+                            <label for="customer-note">Ghi Chú Thêm</label>
+                            <textarea id="customer-note" name="customer-note" rows="3" placeholder="Ví dụ: Yêu cầu giao xe tại sân bay lúc 14h" aria-describedby="note-desc"></textarea>
+                            <small id="note-desc">Yêu cầu đặc biệt hoặc thông tin thêm về việc nhận/trả xe.</small>
+                        </div>
+                         <div class="form-group">
+                            <label><input type="checkbox" id="save-info" checked> <i class="fas fa-save"></i> Lưu thông tin cho lần thuê sau</label>
+                         </div>
+                        <div class="form-group payment-methods-container">
+                            <label>Phương Thức Thanh Toán <span class="required">*</span></label>
+                            <div class="payment-methods">
+                                <div class="payment-option">
+                                    <label><input type="radio" name="payment-method" value="cod" checked aria-checked="true"> <i class="fas fa-handshake"></i> Thanh Toán Khi Nhận Xe</label>
+                                </div>
+                                <div class="payment-option">
+                                    <label><input type="radio" name="payment-method" value="bank-transfer"> <i class="fas fa-university"></i> Chuyển Khoản Ngân Hàng</label>
+                                </div>
+                                <div class="payment-option">
+                                    <label><input type="radio" name="payment-method" value="momo"> <i class="fas fa-mobile-alt"></i> Ví MoMo</label>
+                                </div>
+                            </div>
+                            <div id="payment-method-details"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="discount-code">Mã Giảm Giá <span id="discount-suggestion"></span></label>
+                            <div class="discount-group">
+                                <input type="text" id="discount-code" name="discount-code" placeholder="Nhập mã giảm giá">
+                                <button type="button" id="apply-discount"><i class="fas fa-tag"></i> Áp Dụng</button>
+                            </div>
+                        </div>
+                        <div class="form-actions">
+                            <button type="button" class="btn-back" onclick="window.location.href='vehicles.html'"><i class="fas fa-arrow-left"></i> Quay Lại Chọn Xe</button>
+                            <button type="submit" class="btn"><i class="fas fa-check"></i> Xác Nhận Đặt Xe</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="cart-summary">
+                    <h3><i class="fas fa-clipboard-list"></i> Chi Tiết Đặt Xe</h3>
+                    <div id="order-summary">
+                        <p class="loading-message" style="text-align: center; color: var(--dark-gray);"><i class="fas fa-spinner fa-spin"></i> Đang tải thông tin xe...</p>
+                        </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-container">
+          <div class="footer-column">
+            <h4>Liên hệ chúng tôi tại</h4>
+            <p><a href="mailto:info@mientrungtravel.com">mypnt.24ns@vku.udn.vn</p>
+            <p><a href="mailto:info@mientrungtravel.com">phuocnn.24ns@vku.udn.vn</p>
+            <p><a href="mailto:info@mientrungtravel.com">tupa.24ns@vku.udn.vn</p>
+            <p><a href="mailto:info@mientrungtravel.com">sondct.24ns@vku.udn.vn</p>
+          </div>
+          <div class="footer-column">
+            <h4>Menu chính</h4>
+            <p><a href="index.html">Trang chủ</a></p>
+            <p><a href="vehicles.html">Xe cho thuê</a></p>
+            <p><a href="blog.html">Blog du lịch</a></p>
+            <p><a href="account.html">Tài khoản</a></p>
+          </div>
+          <div class="footer-column">
+            <h4>Chi nhánh</h4>
+            <p><a href="#" target="_blank">Đà Nẵng</a></p>
+            <p><a href="#" target="_blank">Huế</a></p>
+            <p><a href="#" target="_blank">Hội An</a></p>
+          </div>
+        </div>
+        <div class="footer-social">
+          <div class="container">
+                <p style="font-weight: 500; color: white;">Kết nối với chúng tôi tại</p>
+          <div class="social-links">
+            <a href="#"><img src="images/dfb.jpg" alt="Facebook"></a>
+            <a href="#"><img src="images/dins.jpg" alt="Instagram"></a>
+            <a href="#"><img src="images/dzalo.png" alt="Zalo"></a>
+          </div>
+          <div class="footer-bottom">
+            <div class="container">
+                <p>&copy; 2025 Thuê Xe An Toàn. Tất cả các quyền được bảo bảo lưu.</p>
+            </div>
+           </div>
+        </div>
+      </footer>
+    
+
+    <div id="confirm-modal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <h3><i class="fas fa-check-circle"></i> Xác Nhận Đặt Xe</h3>
+            <p>Vui lòng kiểm tra thông tin trước khi xác nhận.</p>
+            <div id="confirm-summary">
+            </div>
+            <div class="modal-actions">
+                <button id="cancel-confirm" class="btn-back"><i class="fas fa-times"></i> Hủy</button>
+                <button id="confirm-order" class="btn"><i class="fas fa-check"></i> Xác Nhận Đặt Xe</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="otp-modal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <h3><i class="fas fa-lock"></i> Xác Nhận OTP</h3>
+            <p>Nhập mã OTP được gửi đến số điện thoại của bạn. Mã có hiệu lực trong <span id="otp-timer">60</span> giây.</p>
+            <div id="otp-error" class="error-message" style="display: none;"></div>
+            <div class="form-group">
+                <input type="text" id="otp-input" placeholder="Nhập mã OTP (VD: 123456)" required maxlength="6" aria-required="true">
+            </div>
+            <div class="modal-actions">
+                <button id="cancel-otp" class="btn-back"><i class="fas fa-times"></i> Hủy</button>
+                <button id="confirm-otp" class="btn"><i class="fas fa-check"></i> Xác Nhận</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="success-modal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <h3><i class="fas fa-check-circle"></i> Đặt Xe Thành Công</h3>
+            <p>Cảm ơn bạn đã sử dụng dịch vụ của chúng tôi! Lượt đặt xe của bạn đã được xác nhận.</p>
+            <div class="modal-actions">
+                <button id="shop-continue" class="btn"><i class="fas fa-car"></i> Tiếp Tục Thuê Xe</button>
+                <button id="view-orders" class="btn"><i class="fas fa-list"></i> Xem Lịch Sử Đặt Xe</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="toast" class="toast" style="display: none;">
+        <span id="toast-message"></span>
+    </div>
+
+    <script type="module" src="javascript/common/utils.js"></script>
+    <script type="module" src="javascript/pages/checkout.js"></script>
+    <script type="module">
+        import initializeCheckoutPage from './javascript/pages/checkout.js';
+        document.addEventListener('DOMContentLoaded', initializeCheckoutPage);
+    </script>
+</body>
+</html>

@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thuê Xe An Toàn - Danh Sách Xe</title>
+    <link rel="stylesheet" href="css/vehicles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+</head>
+<body>
+    <header>
+         <div class="logo">
+            <h1>Thuê Xe An Toàn</h1>
+            <p class="slogan">Trải Nghiệm Tuyệt Vời Trên Mọi Nẻo Đường</p>
+        </div>
+         <div class="header-right-items">
+              <a href="account.html" class="btn"><i class="fas fa-user"></i> Tài Khoản</a>
+         </div>
+    </header>
+
+    <nav>
+         <a href="index.html"><i class="fas fa-home"></i> Trang Chủ</a>
+        <a href="vehicles.html" class="active"><i class="fas fa-car"></i> Xe Cho Thuê</a>
+        <a href="blog.html"><i class="fas fa-blog"></i> Blog Du Lịch</a>
+        <a href="account.html"><i class="fas fa-user"></i> Tài Khoản</a>
+        <a href="contact.html" class="nav-item"><i class="fas fa-address-book"></i> Liên Hệ</a>
+    </nav>
+
+    <div class="container">
+        <h2>Danh Sách Xe Cho Thuê</h2>
+        <div class="filter-controls">
+             <input type="text" id="search-input" placeholder="Tìm kiếm xe (tên, biển số)...">
+             <select id="vehicle-type-filter">
+                  <option value="">Tất cả loại xe</option>
+                  </select>
+        </div>
+
+        <div class="product-grid" id="vehicle-grid">
+            </div>
+
+        <div id="toast" class="toast" style="display: none;">
+            <span id="toast-message"></span>
+        </div>
+    </div>
+
+    <footer>
+        <p>© 2025 Thuê Xe An Toàn. Tất cả các quyền được bảo lưu.</p>
+    </footer>
+
+    <script type="module">
+        // Embed the hardcoded vehicle data directly in the HTML
+        window.hardcodedVehicles = [
+            {
+                "id": "1",
+                "name": "Honda Air Blade",
+                "license_plate": "59-A1 123.45",
+                "type": "Xe máy",
+                "capacity": "2",
+                "transmission": "Tự động",
+                "fuel_type": "Xăng",
+                "price_per_day": 150000,
+                "image_url": "images/11.png"
+            },
+            {
+                "id": "2",
+                "name": "Toyota Vios",
+                "license_plate": "51-B1 678.90",
+                "type": "Ô tô 4 chỗ",
+                "capacity": "4",
+                "transmission": "Tự động",
+                "fuel_type": "Xăng",
+                "price_per_day": 700000,
+                "image_url": "images/2.png"
+            },
+            {
+                "id": "3",
+                "name": "Kia Sedona",
+                "license_plate": "51-C1 123.45",
+                "type": "Ô tô 7 chỗ",
+                "capacity": "7",
+                "transmission": "Tự động",
+                "fuel_type": "Dầu Diesel",
+                "price_per_day": 1000000,
+                "image_url": "images/3.png"
+            },
+            {
+                "id": "4",
+                "name": "Yamaha Exciter",
+                "license_plate": "60-D1 543.21",
+                "type": "Xe máy",
+                "capacity": "2",
+                "transmission": "Số sàn",
+                "fuel_type": "Xăng",
+                "price_per_day": 180000,
+                "image_url": "images/4.png"
+            },
+            {
+                "id": "5",
+                "name": "Hyundai Accent",
+                "license_plate": "30-E1 987.65",
+                "type": "Ô tô 4 chỗ",
+                "capacity": "4",
+                "transmission": "Số sàn",
+                "fuel_type": "Xăng",
+                "price_per_day": 650000,
+                "image_url": "images/5.png"
+            },
+            {
+                "id": "6",
+                "name": "Mitsubishi Xpander",
+                "license_plate": "30-F1 111.22",
+                "type": "Ô tô 7 chỗ",
+                "capacity": "7",
+                "transmission": "Tự động",
+                "fuel_type": "Xăng",
+                "price_per_day": 950000,
+                "image_url": "images/6.png"
+            },
+            {
+                "id": "7",
+                "name": "Ford Transit 24 chỗ",
+                "license_plate": "77-G1 000.01",
+                "type": "Xe khách 18 chỗ",
+                "capacity": "24",
+                "transmission": "Số sàn",
+                "fuel_type": "Dầu Diesel",
+                "price_per_day": 1800000,
+                "image_url": "images/7.jpg"
+            },
+            {
+                "id": "8",
+                "name": "Thaco Meadow 30 chỗ",
+                "license_plate": "92-H1 000.02",
+                "type": "Xe khách 30 chỗ",
+                "capacity": "30",
+                "transmission": "Số sàn",
+                "fuel_type": "Dầu Diesel",
+                "price_per_day": 2600000,
+                "image_url": "images/8.jpg"
+            },
+            {
+                "id": "9",
+                "name": "Honda Winner X",
+                "license_plate": "59-K1 333.44",
+                "type": "Xe máy",
+                "capacity": "2",
+                "transmission": "Số sàn",
+                "fuel_type": "Xăng",
+                "price_per_day": 160000,
+                "image_url": "images/9.png"
+            },
+            {
+                "id": "10",
+                "name": "Mazda 3",
+                "license_plate": "51-L1 555.66",
+                "type": "Ô tô 4 chỗ",
+                "capacity": "4",
+                "transmission": "Tự động",
+                "fuel_type": "Xăng",
+                "price_per_day": 750000,
+                "image_url": "images/10.jpg"
+            },
+            {
+                "id": "11",
+                "name": "Toyota Innova",
+                "license_plate": "51-M1 777.88",
+                "type": "Ô tô 7 chỗ",
+                "capacity": "7",
+                "transmission": "Số sàn",
+                "fuel_type": "Xăng",
+                "price_per_day": 880000,
+                "image_url": "images/111.jpg"
+            },
+            {
+                "id": "12",
+                "name": "Hyundai County 24 chỗ",
+                "license_plate": "77-N1 999.00",
+                "type": "Xe khách 24 chỗ",
+                "capacity": "24",
+                "transmission": "Số sàn",
+                "fuel_type": "Dầu Diesel",
+                "price_per_day": 1950000,
+                "image_url": "images/12.jpg"
+            },
+            {
+                "id": "13",
+                "name": "Samco Felix 30 chỗ",
+                "license_plate": "92-P1 111.22",
+                "type": "Xe khách 30 chỗ",
+                "capacity": "30",
+                "transmission": "Số sàn",
+                "fuel_type": "Dầu Diesel",
+                "price_per_day": 2800000,
+                "image_url": "images/13.jpg"
+            },
+            {
+                "id": "14",
+                "name": "Suzuki Raider",
+                "license_plate": "59-Q1 222.33",
+                "type": "Xe máy",
+                "capacity": "2",
+                "transmission": "Số sàn",
+                "fuel_type": "Xăng",
+                "price_per_day": 170000,
+                "image_url": "images/14.png"
+            },
+            {
+                "id": "15",
+                "name": "Honda City",
+                "license_plate": "51-R1 444.55",
+                "type": "Ô tô 4 chỗ",
+                "capacity": "4",
+                "transmission": "Tự động",
+                "fuel_type": "Xăng",
+                "price_per_day": 720000,
+                "image_url": "images/15.png"
+            },
+            {
+                "id": "16",
+                "name": "Hyundai Santa Fe",
+                "license_plate": "51-S1 666.77",
+                "type": "Ô tô 7 chỗ",
+                "capacity": "7",
+                "transmission": "Tự động",
+                "fuel_type": "Dầu Diesel",
+                "price_per_day": 1150000,
+                "image_url": "images/16.jpg"
+            },
+            {
+                "id": "17",
+                "name": "Thaco Towner 24 chỗ",
+                "license_plate": "77-T1 888.99",
+                "type": "Xe khách 24 chỗ",
+                "capacity": "24",
+                "transmission": "Số sàn",
+                "fuel_type": "Dầu Diesel",
+                "price_per_day": 1750000,
+                "image_url": "images/17.png"
+            },
+            {
+                "id": "18",
+                "name": "Hyundai Global Noble 29 chỗ",
+                "license_plate": "92-V1 000.11",
+                "type": "Xe khách 30 chỗ",
+                "capacity": "30",
+                "transmission": "Số sàn",
+                "fuel_type": "Dầu Diesel",
+                "price_per_day": 2900000,
+                "image_url": "images/18.jpg"
+            },
+            {
+                "id": "19",
+                "name": "Vespa Sprint",
+                "license_plate": "59-W1 222.33",
+                "type": "Xe máy",
+                "capacity": "2",
+                "transmission": "Tự động",
+                "fuel_type": "Xăng",
+                "price_per_day": 200000,
+                "image_url": "images/19.png"
+            },
+            {
+                "id": "20",
+                "name": "Kia K3",
+                "license_plate": "51-X1 444.55",
+                "type": "Ô tô 4 chỗ",
+                "capacity": "4",
+                "transmission": "Tự động",
+                "fuel_type": "Xăng",
+                "price_per_day": 780000,
+                "image_url": "images/20.png"
+            },
+            {
+                "id": "21",
+                "name": "Ford Everest",
+                "license_plate": "51-Y1 666.77",
+                "type": "Ô tô 7 chỗ",
+                "capacity": "7",
+                "transmission": "Tự động",
+                "fuel_type": "Dầu Diesel",
+                "price_per_day": 1200000,
+                "image_url": "images/21.jpg"
+            },
+            {
+                "id": "22",
+                "name": "Honda Air Blade",
+                "license_plate": "59-Z1 888.99",
+                "type": "Xe máy",
+                "capacity": "2",
+                "transmission": "Tự động",
+                "fuel_type": "Xăng",
+                "price_per_day": 155000,
+                "image_url": "images/22.jpg"
+            },
+            {
+                "id": "23",
+                "name": "VinFast Fadil",
+                "license_plate": "30-A2 000.11",
+                "type": "Ô tô 4 chỗ",
+                "capacity": "4",
+                "transmission": "Tự động",
+                "fuel_type": "Xăng",
+                "price_per_day": 620000,
+                "image_url": "images/23.jpg"
+            },
+            {
+                "id": "24",
+                "name": "Mazda CX-8",
+                "license_plate": "51-B2 222.33",
+                "type": "Ô tô 7 chỗ",
+                "capacity": "7",
+                "transmission": "Tự động",
+                "fuel_type": "Xăng",
+                "price_per_day": 1100000,
+                "image_url": "images/24.jpg"
+            },
+            {
+                "id": "25",
+                "name": "Hyundai County 24 chỗ",
+                "license_plate": "77-C2 444.55",
+                "type": "Xe khách 24 chỗ",
+                "capacity": "24",
+                "transmission": "Số sàn",
+                "fuel_type": "Dầu Diesel",
+                "price_per_day": 1900000,
+                "image_url": "images/25.png"
+            },
+            {
+                "id": "26",
+                "name": "Thaco Towner 5 chỗ",
+                "license_plate": "92-D2 666.77",
+                "type": "Xe khách 5 chỗ",
+                "capacity": "5",
+                "transmission": "Số sàn",
+                "fuel_type": "Dầu Diesel",
+                "price_per_day": 2750000,
+                "image_url": "images/26.png"
+            },
+            {
+                "id": "27",
+                "name": "Piaggio Liberty",
+                "license_plate": "59-E2 888.99",
+                "type": "Xe máy",
+                "capacity": "2",
+                "transmission": "Tự động",
+                "fuel_type": "Xăng",
+                "price_per_day": 190000,
+                "image_url": "images/27.jpg"
+            },
+            {
+                "id": "28",
+                "name": "Toyota Corolla Altis",
+                "license_plate": "51-F2 000.00",
+                "type": "Ô tô 4 chỗ",
+                "capacity": "4",
+                "transmission": "Tự động",
+                "fuel_type": "Xăng",
+                "price_per_day": 790000,
+                "image_url": "images/28.png"
+            },
+            {
+                "id": "29",
+                "name": "Honda CR-V",
+                "license_plate": "51-G2 222.44",
+                "type": "Ô tô 7 chỗ",
+                "capacity": "5",
+                "transmission": "Tự động",
+                "fuel_type": "Xăng",
+                "price_per_day": 1050000,
+                "image_url": "images/29.jpg"
+            },
+            {
+                "id": "30",
+                "name": "Ford Transit 24 chỗ",
+                "license_plate": "77-H2 333.55",
+                "type": "Xe khách 24 chỗ",
+                "capacity": "24",
+                "transmission": "Số sàn",
+                "fuel_type": "Dầu Diesel",
+                "price_per_day": 1850000,
+                "image_url": "images/30.png"
+            },
+            {
+                "id": "31",
+                "name": "Hyundai Global Noble 30 chỗ",
+                "license_plate": "92-K2 444.66",
+                "type": "Xe khách 30 chỗ",
+                "capacity": "30",
+                "transmission": "Số sàn",
+                "fuel_type": "Dầu Diesel",
+                "price_per_day": 3000000,
+                "image_url": "images/31.jpg"
+            },
+            {
+                "id": "32",
+                "name": "Honda Vision",
+                "license_plate": "59-L2 555.77",
+                "type": "Xe máy",
+                "capacity": "2",
+                "transmission": "Tự động",
+                "fuel_type": "Xăng",
+                "price_per_day": 130000,
+                "image_url": "images/32.jpg"
+            },
+            {
+                "id": "33",
+                "name": "VinFast Lux A2.0",
+                "license_plate": "29-M2 666.88",
+                "type": "Ô tô 4 chỗ",
+                "capacity": "4",
+                "transmission": "Tự động",
+                "fuel_type": "Xăng",
+                "price_per_day": 800000,
+                "image_url": "images/33.png"
+            },
+            {
+                "id": "34",
+                "name": "Toyota Fortuner",
+                "license_plate": "51-N2 777.99",
+                "type": "Ô tô 7 chỗ",
+                "capacity": "7",
+                "transmission": "Tự động",
+                "fuel_type": "Dầu Diesel",
+                "price_per_day": 1300000,
+                "image_url": "images/34.png"
+            },
+            {
+                "id": "35",
+                "name": "Hyundai County 24 chỗ",
+                "license_plate": "77-P2 888.00",
+                "type": "Xe khách 24 chỗ",
+                "capacity": "24",
+                "transmission": "Số sàn",
+                "fuel_type": "Dầu Diesel",
+                "price_per_day": 2000000,
+                "image_url": "images/35.png"
+            },
+            {
+                "id": "36",
+                "name": "Thaco Meadow 30 chỗ",
+                "license_plate": "92-Q2 999.11",
+                "type": "Xe khách 30 chỗ",
+                "capacity": "30",
+                "transmission": "Số sàn",
+                "fuel_type": "Dầu Diesel",
+                "price_per_day": 3100000,
+                "image_url": "images/36.png"
+            },
+            {
+                "id": "37",
+                "name": "Honda SH Mode",
+                "license_plate": "59-R2 111.22",
+                "type": "Xe máy",
+                "capacity": "2",
+                "transmission": "Tự động",
+                "fuel_type": "Xăng",
+                "price_per_day": 170000,
+                "image_url": "images/37.png"
+            },
+            {
+                "id": "38",
+                "name": "Hyundai Elantra",
+                "license_plate": "51-S2 333.44",
+                "type": "Ô tô 4 chỗ",
+                "capacity": "4",
+                "transmission": "Tự động",
+                "fuel_type": "Xăng",
+                "price_per_day": 730000,
+                "image_url": "images/38.png"
+            },
+            {
+                "id": "39",
+                "name": "Kia Sorento",
+                "license_plate": "51-T2 555.66",
+                "type": "Ô tô 7 chỗ",
+                "capacity": "7",
+                "transmission": "Tự động",
+                "fuel_type": "Dầu Diesel",
+                "price_per_day": 1250000,
+                "image_url": "images/39.jpg"
+            },
+            {
+                "id": "40",
+                "name": "Thaco Towner 24 chỗ",
+                "license_plate": "77-V2 777.88",
+                "type": "Xe khách 24 chỗ",
+                "capacity": "24",
+                "transmission": "Số sàn",
+                "fuel_type": "Dầu Diesel",
+                "price_per_day": 1700000,
+                "image_url": "images/40.png"
+            },
+            {
+                "id": "41",
+                "name": "Hyundai Global Noble 30 chỗ",
+                "license_plate": "92-X2 999.00",
+                "type": "Xe khách 30 chỗ",
+                "capacity": "30",
+                "transmission": "Số sàn",
+                "fuel_type": "Dầu Diesel",
+                "price_per_day": 3200000,
+                "image_url": "images/41.jpg"
+            },
+            {
+                "id": "42",
+                "name": "Yamaha Janus",
+                "license_plate": "59-Y2 111.33",
+                "type": "Xe máy",
+                "capacity": "2",
+                "transmission": "Tự động",
+                "fuel_type": "Xăng",
+                "price_per_day": 140000,
+                "image_url": "images/42.png"
+            },
+            {
+                "id": "43",
+                "name": "Toyota Camry",
+                "license_plate": "51-Z2 222.44",
+                "type": "Ô tô 4 chỗ",
+                "capacity": "4",
+                "transmission": "Tự động",
+                "fuel_type": "Xăng",
+                "price_per_day": 850000,
+                "image_url": "images/43.png"
+            },
+            {
+                "id": "44",
+                "name": "VinFast Lux SA2.0",
+                "license_plate": "29-A3 333.55",
+                "type": "Ô tô 7 chỗ",
+                "capacity": "7",
+                "transmission": "Tự động",
+                "fuel_type": "Xăng",
+                "price_per_day": 1400000,
+                "image_url": "images/44.png"
+            },
+            {
+                "id": "45",
+                "name": "Ford Transit 24 chỗ",
+                "license_plate": "77-B3 444.66",
+                "type": "Xe khách 24 chỗ",
+                "capacity": "24",
+                "transmission": "Số sàn",
+                "fuel_type": "Dầu Diesel",
+                "price_per_day": 1820000,
+                "image_url": "images/45.jpg"
+            },
+            {
+                "id": "46",
+                "name": "Thaco Frontier TF200",
+                "license_plate": "92-C3 555.77",
+                "type": "Xe tải 2 chỗ",
+                "capacity": "2",
+                "transmission": "Số sàn",
+                "fuel_type": "Dầu Diesel",
+                "price_per_day": 2850000,
+                "image_url": "images/46.jpg"
+            },
+            {
+                "id": "47",
+                "name": "Honda Wave Alpha",
+                "license_plate": "59-D3 666.88",
+                "type": "Xe máy",
+                "capacity": "2",
+                "transmission": "Số sàn",
+                "fuel_type": "Xăng",
+                "price_per_day": 120000,
+                "image_url": "images/47.png"
+            },
+            {
+                "id": "48",
+                "name": "Honda Civic",
+                "license_plate": "51-E3 777.99",
+                "type": "Ô tô 4 chỗ",
+                "capacity": "4",
+                "transmission": "Tự động",
+                "fuel_type": "Xăng",
+                "price_per_day": 760000,
+                "image_url": "images/48.png"
+            },
+            {
+                "id": "49",
+                "name": "Hyundai Tucson",
+                "license_plate": "51-F3 888.00",
+                "type": "Ô tô 7 chỗ",
+                "capacity": "5",
+                "transmission": "Tự động",
+                "fuel_type": "Xăng",
+                "price_per_day": 1000000,
+                "image_url": "images/49.png"
+            },
+            {
+                "id": "50",
+                "name": "Hyundai County 24 chỗ",
+                "license_plate": "77-G3 999.11",
+                "type": "Xe khách 24 chỗ",
+                "capacity": "24",
+                "transmission": "Số sàn",
+                "fuel_type": "Dầu Diesel",
+                "price_per_day": 1980000,
+                "image_url": "images/50.jpg"
+            },
+            {
+                "id": "51",
+                "name": "Samco Felix 30 chỗ",
+                "license_plate": "92-H3 000.22",
+                "type": "Xe khách 30 chỗ",
+                "capacity": "30",
+                "transmission": "Số sàn",
+                "fuel_type": "Dầu Diesel",
+                "price_per_day": 2950000,
+                "image_url": "images/51.jpg"
+            },
+            {
+                "id": "52",
+                "name": "Honda Future",
+                "license_plate": "59-K3 111.33",
+                "type": "Xe máy",
+                "capacity": "2",
+                "transmission": "Số sàn",
+                "fuel_type": "Xăng",
+                "price_per_day": 145000,
+                "image_url": "images/52.jpg"
+            },
+            {
+                "id": "53",
+                "name": "Kia Cerato",
+                "license_plate": "51-L3 222.44",
+                "type": "Ô tô 4 chỗ",
+                "capacity": "4",
+                "transmission": "Tự động",
+                "fuel_type": "Xăng",
+                "price_per_day": 700000,
+                "image_url": "images/53.png"
+            },
+            {
+                "id": "54",
+                "name": "Toyota Rush",
+                "license_plate": "51-M3 333.55",
+                "type": "Ô tô 7 chỗ",
+                "capacity": "7",
+                "transmission": "Tự động",
+                "fuel_type": "Xăng",
+                "price_per_day": 900000,
+                "image_url": "images/54.png"
+            },
+            {
+                "id": "55",
+                "name": "Ford Transit 24 chỗ",
+                "license_plate": "77-N3 444.66",
+                "type": "Xe khách 24 chỗ",
+                "capacity": "24",
+                "transmission": "Số sàn",
+                "fuel_type": "Dầu Diesel",
+                "price_per_day": 1870000,
+                "image_url": "images/55.png"
+            },
+            {
+                "id": "56",
+                "name": "Hyundai Global Noble 30 chỗ",
+                "license_plate": "92-P3 555.77",
+                "type": "Xe khách 30 chỗ",
+                "capacity": "30",
+                "transmission": "Số sàn",
+                "fuel_type": "Dầu Diesel",
+                "price_per_day": 3050000,
+                "image_url": "images/56.jpg"
+            },
+            {
+                "id": "57",
+                "name": "Honda PCX",
+                "license_plate": "59-Q3 666.88",
+                "type": "Xe máy",
+                "capacity": "2",
+                "transmission": "Tự động",
+                "fuel_type": "Xăng",
+                "price_per_day": 220000,
+                "image_url": "images/57.png"
+            },
+            {
+                "id": "58",
+                "name": "Toyota Yaris Cross",
+                "license_plate": "51-R3 777.99",
+                "type": "Ô tô 4 chỗ",
+                "capacity": "4",
+                "transmission": "Tự động",
+                "fuel_type": "Xăng",
+                "price_per_day": 770000,
+                "image_url": "images/58.jpg"
+            },
+            {
+                "id": "59",
+                "name": "Ford Ecosport",
+                "license_plate": "51-S3 888.00",
+                "type": "Ô tô 7 chỗ",
+                "capacity": "7",
+                "transmission": "Tự động",
+                "fuel_type": "Xăng",
+                "price_per_day": 850000,
+                "image_url": "images/59.jpg"
+            },
+            {
+                "id": "60",
+                "name": "Hyundai County 24 chỗ",
+                "license_plate": "77-T3 999.11",
+                "type": "Xe khách 24 chỗ",
+                "capacity": "24",
+                "transmission": "Số sàn",
+                "fuel_type": "Dầu Diesel",
+                "price_per_day": 1920000,
+                "image_url": "images/60.jpg"
+            },
+            {
+                "id": "61",
+                "name": "Honda Scoopy",
+                "license_plate": "59-X3 111.33",
+                "type": "Xe máy",
+                "capacity": "2",
+                "transmission": "Tự động",
+                "fuel_type": "Xăng",
+                "price_per_day": 165000,
+                "image_url": "images/61.png"
+            },
+            {
+                "id": "62",
+                "name": "Suzuki Swift",
+                "license_plate": "51-Y3 222.44",
+                "type": "Ô tô 4 chỗ",
+                "capacity": "4",
+                "transmission": "Tự động",
+                "fuel_type": "Xăng",
+                "price_per_day": 680000,
+                "image_url": "images/62.jpg"
+            },
+            {
+                "id": "63",
+                "name": "Chevrolet Captiva",
+                "license_plate": "51-Z3 333.55",
+                "type": "Ô tô 7 chỗ",
+                "capacity": "7",
+                "transmission": "Tự động",
+                "fuel_type": "Xăng",
+                "price_per_day": 920000,
+                "image_url": "images/63.jpg"
+            },
+        ];
+
+        import initVehiclesPage from './javascript/pages/vehicles.js';
+        
+        document.addEventListener('DOMContentLoaded', initVehiclesPage);
+    </script>
+</body>
+</html>
