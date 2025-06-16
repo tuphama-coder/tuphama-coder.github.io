@@ -11,7 +11,7 @@ export default function initIndexPage() {
 async function loadFeaturedVehicles() { 
     console.log('Loading featured vehicles...');
     const featuredContainer = document.querySelector('.featured-products .product-grid'); 
-    if (!featuredContainer) {
+    if (!featuredContainer) { 
         console.error('Không tìm thấy phần tử .featured-products .product-grid');
         return;
     }
